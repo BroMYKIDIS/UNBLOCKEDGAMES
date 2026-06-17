@@ -165,6 +165,24 @@ small {
   padding: 30px;
 }
 
+footer {
+  background: #0f172a;
+  padding: 30px;
+  text-align: center;
+  color: #94a3b8;
+  margin-top: 50px;
+  border-top: 1px solid #1e293b;
+}
+
+footer a {
+  color: #38bdf8;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
 @media (max-width: 768px) {
   nav {
     flex-direction: column;
@@ -205,7 +223,7 @@ small {
 <div id="home" class="page active">
   <div class="hero">
     <h1>🎮 Unblocked.io</h1>
-    <p>Gaming Hub & Useful Tools</p>
+    <p>Gaming Hub & Useful Tools - Your All-in-One Platform</p>
   </div>
 
   <h2 class="section-title">🔥 Trending Games</h2>
@@ -223,10 +241,10 @@ small {
       <div class="tool-name">Calculator</div>
       <div class="tool-desc">Simple and fast calculator</div>
     </div>
-    <div class="tool-card" onclick="openTool('timer.html')">
-      <div class="tool-icon">⏱️</div>
-      <div class="tool-name">Timer</div>
-      <div class="tool-desc">Customizable countdown timer</div>
+    <div class="tool-card" onclick="openTool('joke-generator.html')">
+      <div class="tool-icon">😂</div>
+      <div class="tool-name">Joke Generator</div>
+      <div class="tool-desc">Get random jokes from an API</div>
     </div>
   </div>
 </div>
@@ -278,6 +296,11 @@ small {
       <div class="tool-name">Color Picker</div>
       <div class="tool-desc">Pick and convert colors (HEX, RGB)</div>
     </div>
+    <div class="tool-card" onclick="openTool('joke-generator.html')">
+      <div class="tool-icon">😂</div>
+      <div class="tool-name">Joke Generator</div>
+      <div class="tool-desc">Get random jokes from an external API</div>
+    </div>
   </div>
 </div>
 
@@ -285,20 +308,39 @@ small {
 <div id="blog" class="page">
   <div style="padding: 30px;">
     <div class="card">
-      <h2>📰 Blog</h2>
-      <p>Welcome to Unblocked.io! This is a personal gaming hub with favorites, trending games, and useful tools.</p>
-      <h3 style="margin-top: 20px; color: #38bdf8;">Features:</h3>
-      <ul style="margin-left: 20px;">
+      <h2>📰 Blog - About Unblocked.io</h2>
+      <p style="margin-top: 15px;">Welcome to Unblocked.io! This is a personal gaming hub with favorites, trending games, and useful tools all in one place.</p>
+      
+      <h3 style="margin-top: 25px; color: #38bdf8;">🌟 Why Choose Unblocked.io?</h3>
+      <ul style="margin-left: 20px; margin-top: 10px;">
+        <li>All your games in one place</li>
+        <li>Track your most played games</li>
+        <li>Access powerful tools instantly</li>
+        <li>No installation required</li>
+        <li>Works on all devices</li>
+        <li>Complete privacy - data stored locally</li>
+      </ul>
+
+      <h3 style="margin-top: 25px; color: #38bdf8;">🛠️ Available Tools</h3>
+      <ul style="margin-left: 20px; margin-top: 10px;">
         <li>🎮 Manage your game library</li>
         <li>⭐ Mark and access favorites</li>
         <li>📊 Track game statistics</li>
-        <li>🛠️ Access 6 useful tools</li>
         <li>🌍 World time zone clock</li>
         <li>🧮 Calculator & Timer</li>
         <li>✅ To-Do List Manager</li>
         <li>🔐 Password Generator</li>
         <li>🎨 Color Picker Tool</li>
+        <li>😂 Joke Generator</li>
       </ul>
+
+      <h3 style="margin-top: 25px; color: #38bdf8;">🚀 Getting Started</h3>
+      <p style="margin-top: 10px;">
+        1. Add your favorite games in the Admin panel<br>
+        2. Mark them as favorites<br>
+        3. Access tools from the Tools section<br>
+        4. All your data is saved automatically!
+      </p>
     </div>
   </div>
 </div>
@@ -307,10 +349,19 @@ small {
 <div id="contact" class="page">
   <div style="padding: 30px;">
     <div class="card">
-      <h2>📧 Contact</h2>
-      <p><strong>Email:</strong> quadekeefe2014@gmail.com</p>
-      <p><strong>GitHub:</strong> <a href="https://github.com/BroMYKIDIS" style="color: #38bdf8;">BroMYKIDIS</a></p>
-      <p style="margin-top: 20px; color: #94a3b8;">Feel free to reach out with questions or suggestions!</p>
+      <h2>📧 Contact & Support</h2>
+      <p style="margin-top: 15px;"><strong>Email:</strong> quadekeefe2014@gmail.com</p>
+      <p style="margin-top: 10px;"><strong>GitHub:</strong> <a href="https://github.com/BroMYKIDIS" style="color: #38bdf8; text-decoration: none;">BroMYKIDIS</a></p>
+      <p style="margin-top: 10px;"><strong>Repository:</strong> <a href="https://github.com/BroMYKIDIS/UNBLOCKEDGAMES" style="color: #38bdf8; text-decoration: none;">UNBLOCKEDGAMES on GitHub</a></p>
+      
+      <h3 style="margin-top: 25px; color: #38bdf8;">💬 Feedback</h3>
+      <p style="margin-top: 10px; color: #94a3b8;">Feel free to reach out with questions, suggestions, or bug reports! We'd love to hear from you and help improve your experience.</p>
+      
+      <h3 style="margin-top: 25px; color: #38bdf8;">🔗 Quick Links</h3>
+      <p style="margin-top: 10px;">
+        <a href="https://github.com/BroMYKIDIS" style="color: #38bdf8; text-decoration: none;">Visit GitHub Profile</a> • 
+        <a href="https://github.com/BroMYKIDIS/UNBLOCKEDGAMES" style="color: #38bdf8; text-decoration: none;">View Repository</a>
+      </p>
     </div>
   </div>
 </div>
@@ -322,8 +373,8 @@ small {
 
     <div class="card" style="margin: 20px 0;">
       <h3>➕ Add New Game</h3>
-      <input id="name" placeholder="Game name" style="width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; border: none;"><br>
-      <input id="url" placeholder="Game URL" style="width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; border: none;"><br>
+      <input id="name" placeholder="Game name" style="width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; border: none; color: #000;"><br>
+      <input id="url" placeholder="Game URL" style="width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; border: none; color: #000;"><br>
       <button onclick="addGame()" style="width: 100%; padding: 12px;">Add Game</button>
     </div>
 
@@ -332,9 +383,19 @@ small {
       <p><strong>Total Games:</strong> <span id="totalGames">0</span></p>
       <p><strong>Total Favorites:</strong> <span id="totalFavs">0</span></p>
       <p><strong>Total Plays:</strong> <span id="totalPlays">0</span></p>
+      <p style="margin-top: 15px; color: #94a3b8; font-size: 0.9em;">All data is stored in your browser's local storage. No information is sent to any server.</p>
     </div>
   </div>
 </div>
+
+<footer>
+  <p>&copy; 2026 Unblocked.io - Your All-in-One Gaming & Tools Hub</p>
+  <p style="margin-top: 10px; font-size: 0.9em;">
+    <a href="https://github.com/BroMYKIDIS/UNBLOCKEDGAMES">View on GitHub</a> • 
+    Built with ❤️ by <a href="https://github.com/BroMYKIDIS">BroMYKIDIS</a>
+  </p>
+  <p style="margin-top: 15px; font-size: 0.85em;">All data stored locally • No tracking • 100% Private</p>
+</footer>
 
 <script>
 let games = JSON.parse(localStorage.getItem("games") || "[]");
@@ -402,6 +463,11 @@ function renderGames() {
   if (!el) return;
 
   el.innerHTML = "";
+  if (games.length === 0) {
+    el.innerHTML = '<div class="card" style="grid-column: span 100%; text-align: center; padding: 40px;">No games added yet. Go to Admin to add your first game!</div>';
+    return;
+  }
+  
   games.forEach(g => {
     el.innerHTML += `
       <div class="card">
@@ -419,6 +485,10 @@ function renderFavs() {
   if (!el) return;
 
   el.innerHTML = "";
+  if (favs.length === 0) {
+    return;
+  }
+  
   favs.forEach(f => {
     el.innerHTML += `<div class="card">⭐ ${f.name}</div>`;
   });
@@ -433,6 +503,11 @@ function renderTrending() {
   });
 
   el.innerHTML = "";
+  if (sorted.length === 0) {
+    el.innerHTML = '<div class="card" style="grid-column: span 100%; text-align: center; padding: 40px;">No games yet. Add games in Admin section!</div>';
+    return;
+  }
+  
   sorted.slice(0, 6).forEach(g => {
     el.innerHTML += `
       <div class="card">
