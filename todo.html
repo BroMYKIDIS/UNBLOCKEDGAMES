@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>To-Do List - Unblocked.io</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.container {
+  background: #1a1a2e;
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  max-width: 500px;
+  width: 100%;
+}
+
+h1 {
+  text-align: center;
+  color: #fff;
+  margin-bottom: 30px;
+  font-size: 2em;
+}
+
+.input-section {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+input {
+  flex: 1;
+  padding: 12px;
+  border: 2px solid #667eea;
+  border-radius: 10px;
+  background: #0f172a;
+  color: #fff;
+  font-size: 1em;
+}
+
+input:focus {
+  outline: none;
+  border-color: #00ff88;
+}
+
+button {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 10px;
+  background: #667eea;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+button:hover {
+  background: #764ba2;
+  transform: scale(1.05);
+}
+
+.todo-list {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.todo-item {
+  background: #0f172a;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-left: 4px solid #667eea;
+}
+
+.todo-item.completed {
+  opacity: 0.6;
+  border-left-color: #00ff88;
+}
+
+.todo-item.completed .todo-text {
+  text-decoration: line-through;
+}
+
+.todo-text {
+  flex: 1;
+  color: #fff;
+}
+
+.todo-buttons {
+  display: flex;
+  gap: 5px;
+}
+
+.todo-btn {
+  padding: 5px 10px;
+  font-size: 0.8em;
+  background: #2563eb;
+}
+
+.todo-btn.delete {
+  background: #ef4444;
+}
+
+.todo-btn.delete:hover {
+  background: #dc2626;
+}
+
+.todo-btn.complete {
+  background: #00ff88;
+  color: #000;
+}
+
+.todo-btn.complete:hover {
+  background: #00dd77;
+}
+
+.back-btn {
+  width: 100%;
+  margin-bottom: 20px;
+  background: #667eea;
+}
+
+.back-btn:hover {
+  background: #764ba2;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <button class="back-btn" onclick="window.location.href='index.html'">← Back to Hub</button>
+  <h1>✅ To-Do List</h1>
+  
+  <div class="input-section">
+    <input type="text" id="todoInput" placeholder="Add a new task..." onkeypress="if(event.key==='Enter') addTodo()">
+    <button onclick="addTodo()">Add</button>
+  </div>
+  
+  <div class="todo-list" id="todoList"></div>
+</div>
+
+<script>
+let todos = JSON.parse(localStorage.getItem("todos") || "[]");
+
+function saveTodos() {
+  localStorage.setItem("todos", JSON.stringify(todos));
+}
+
+function addTodo() {
+  const input = document.getElementById("todoInput");
+  const text = input.value.trim();
+  
+  if (!text) return;
+  
+  todos.push({
+    id: Date.now(),
+    text: text,
+    completed: false
+  });
+  
+  saveTodos();
+  input.value = "";
+  renderTodos();
+}
+
+function toggleTodo(id) {
+  const todo = todos.find(t => t.id === id);
+  if (todo) {
+    todo.completed = !todo.completed;
+    saveTodos();
+    renderTodos();
+  }
+}
+
+function deleteTodo(id) {
+  todos = todos.filter(t => t.id !== id);
+  saveTodos();
+  renderTodos();
+}
+
+function renderTodos() {
+  const list = document.getElementById("todoList");
+  list.innerHTML = "";
+  
+  todos.forEach(todo => {
+    const item = document.createElement("div");
+    item.className = `todo-item ${todo.completed ? 'completed' : ''}`;
+    item.innerHTML = `
+      <div class="todo-text">${todo.text}</div>
+      <div class="todo-buttons">
+        <button class="todo-btn complete" onclick="toggleTodo(${todo.id})">${todo.completed ? '↩️' : '✓'}</button>
+        <button class="todo-btn delete" onclick="deleteTodo(${todo.id})">🗑️</button>
+      </div>
+    `;
+    list.appendChild(item);
+  });
+}
+
+renderTodos();
+</script>
+
+</body>
+</html>
