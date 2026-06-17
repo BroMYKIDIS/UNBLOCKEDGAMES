@@ -183,6 +183,100 @@ footer a:hover {
   text-decoration: underline;
 }
 
+/* Admin Password Modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal.active {
+  display: flex;
+}
+
+.modal-content {
+  background: #1a1a2e;
+  padding: 40px;
+  border-radius: 15px;
+  border: 2px solid #667eea;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.modal-content h2 {
+  color: #38bdf8;
+  margin-bottom: 20px;
+}
+
+.modal-content p {
+  color: #94a3b8;
+  margin-bottom: 20px;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 2px solid #667eea;
+  border-radius: 8px;
+  background: #0f172a;
+  color: white;
+  font-size: 1em;
+}
+
+.modal-content input:focus {
+  outline: none;
+  border-color: #00ff88;
+}
+
+.modal-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.modal-buttons button {
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+.modal-buttons button.confirm {
+  background: #00ff88;
+  color: #000;
+}
+
+.modal-buttons button.confirm:hover {
+  background: #00dd77;
+}
+
+.modal-buttons button.cancel {
+  background: #ef4444;
+  color: white;
+}
+
+.modal-buttons button.cancel:hover {
+  background: #dc2626;
+}
+
+.error-message {
+  color: #ef4444;
+  margin-bottom: 10px;
+  font-size: 0.9em;
+}
+
 @media (max-width: 768px) {
   nav {
     flex-direction: column;
@@ -207,6 +301,20 @@ footer a:hover {
 
 <body>
 
+<!-- Admin Password Modal -->
+<div id="adminModal" class="modal">
+  <div class="modal-content">
+    <h2>🔐 Admin Access</h2>
+    <p>Enter the admin password to continue</p>
+    <div class="error-message" id="errorMessage"></div>
+    <input type="password" id="adminPassword" placeholder="Enter password" onkeypress="if(event.key==='Enter') checkAdminPassword()">
+    <div class="modal-buttons">
+      <button class="confirm" onclick="checkAdminPassword()">✓ Submit</button>
+      <button class="cancel" onclick="cancelAdmin()">✕ Cancel</button>
+    </div>
+  </div>
+</div>
+
 <nav>
   <div class="logo" onclick="show('home')">🎮 Unblocked.io</div>
   <nav-links>
@@ -215,7 +323,7 @@ footer a:hover {
     <a onclick="show('tools')">Tools</a>
     <a onclick="show('blog')">Blog</a>
     <a onclick="show('contact')">Contact</a>
-    <a onclick="show('admin')">Admin</a>
+    <a onclick="requestAdminAccess()">Admin</a>
   </nav-links>
 </nav>
 
@@ -398,9 +506,38 @@ footer a:hover {
 </footer>
 
 <script>
+// ADMIN PASSWORD - Change this to your desired password
+const ADMIN_PASSWORD = "UnblockedGames.io!";
+
 let games = JSON.parse(localStorage.getItem("games") || "[]");
 let favs = JSON.parse(localStorage.getItem("favs") || "[]");
 let stats = JSON.parse(localStorage.getItem("stats") || "{}");
+
+function requestAdminAccess() {
+  document.getElementById("adminModal").classList.add("active");
+  document.getElementById("adminPassword").value = "";
+  document.getElementById("errorMessage").textContent = "";
+  document.getElementById("adminPassword").focus();
+}
+
+function checkAdminPassword() {
+  const password = document.getElementById("adminPassword").value;
+  
+  if (password === ADMIN_PASSWORD) {
+    document.getElementById("adminModal").classList.remove("active");
+    show("admin");
+  } else {
+    document.getElementById("errorMessage").textContent = "❌ Incorrect password. Try again!";
+    document.getElementById("adminPassword").value = "";
+    document.getElementById("adminPassword").focus();
+  }
+}
+
+function cancelAdmin() {
+  document.getElementById("adminModal").classList.remove("active");
+  document.getElementById("adminPassword").value = "";
+  document.getElementById("errorMessage").textContent = "";
+}
 
 function save() {
   localStorage.setItem("games", JSON.stringify(games));
@@ -530,6 +667,14 @@ function updateStats() {
   document.getElementById("totalGames").textContent = games.length;
   document.getElementById("totalFavs").textContent = favs.length;
   document.getElementById("totalPlays").textContent = totalPlays;
+}
+
+// Close modal when clicking outside of it
+window.onclick = function(event) {
+  const modal = document.getElementById("adminModal");
+  if (event.target == modal) {
+    cancelAdmin();
+  }
 }
 
 renderAll();
