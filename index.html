@@ -34,6 +34,7 @@ nav {
   font-weight: bold;
   font-size: 1.5em;
   text-decoration: none;
+  cursor: pointer;
 }
 
 nav-links {
@@ -189,7 +190,7 @@ small {
 <body>
 
 <nav>
-  <div class="logo" onclick="show('home')" style="cursor: pointer;">🎮 Unblocked.io</div>
+  <div class="logo" onclick="show('home')">🎮 Unblocked.io</div>
   <nav-links>
     <a onclick="show('home')">Home</a>
     <a onclick="show('games')">Games</a>
@@ -212,10 +213,20 @@ small {
 
   <h2 class="section-title">🛠️ Featured Tools</h2>
   <div class="tools-grid">
-    <div class="tool-card" onclick="show('tools')">
+    <div class="tool-card" onclick="openTool('clock.html')">
       <div class="tool-icon">🕐</div>
       <div class="tool-name">World Clock</div>
       <div class="tool-desc">Real-time digital clock with multiple time zones</div>
+    </div>
+    <div class="tool-card" onclick="openTool('calculator.html')">
+      <div class="tool-icon">🧮</div>
+      <div class="tool-name">Calculator</div>
+      <div class="tool-desc">Simple and fast calculator</div>
+    </div>
+    <div class="tool-card" onclick="openTool('timer.html')">
+      <div class="tool-icon">⏱️</div>
+      <div class="tool-name">Timer</div>
+      <div class="tool-desc">Customizable countdown timer</div>
     </div>
   </div>
 </div>
@@ -237,12 +248,35 @@ small {
   </div>
 
   <div class="tools-grid">
-    <div class="tool-card" onclick="openInNewTab('clock.html')">
+    <div class="tool-card" onclick="openTool('clock.html')">
       <div class="tool-icon">🕐</div>
       <div class="tool-name">Digital Clock</div>
       <div class="tool-desc">Display current time in multiple time zones worldwide</div>
-      <br>
-      <button onclick="event.stopPropagation(); openInNewTab('clock.html')">Open Clock</button>
+    </div>
+    <div class="tool-card" onclick="openTool('calculator.html')">
+      <div class="tool-icon">🧮</div>
+      <div class="tool-name">Calculator</div>
+      <div class="tool-desc">Perform quick mathematical calculations</div>
+    </div>
+    <div class="tool-card" onclick="openTool('todo.html')">
+      <div class="tool-icon">✅</div>
+      <div class="tool-name">To-Do List</div>
+      <div class="tool-desc">Manage your daily tasks and reminders</div>
+    </div>
+    <div class="tool-card" onclick="openTool('password-generator.html')">
+      <div class="tool-icon">🔐</div>
+      <div class="tool-name">Password Generator</div>
+      <div class="tool-desc">Create strong and secure passwords</div>
+    </div>
+    <div class="tool-card" onclick="openTool('timer.html')">
+      <div class="tool-icon">⏱️</div>
+      <div class="tool-name">Timer</div>
+      <div class="tool-desc">Set custom timers and countdowns</div>
+    </div>
+    <div class="tool-card" onclick="openTool('color-picker.html')">
+      <div class="tool-icon">🎨</div>
+      <div class="tool-name">Color Picker</div>
+      <div class="tool-desc">Pick and convert colors (HEX, RGB)</div>
     </div>
   </div>
 </div>
@@ -258,8 +292,12 @@ small {
         <li>🎮 Manage your game library</li>
         <li>⭐ Mark and access favorites</li>
         <li>📊 Track game statistics</li>
-        <li>🛠️ Access useful tools</li>
+        <li>🛠️ Access 6 useful tools</li>
         <li>🌍 World time zone clock</li>
+        <li>🧮 Calculator & Timer</li>
+        <li>✅ To-Do List Manager</li>
+        <li>🔐 Password Generator</li>
+        <li>🎨 Color Picker Tool</li>
       </ul>
     </div>
   </div>
@@ -318,7 +356,7 @@ function show(page) {
   }
 }
 
-function openInNewTab(page) {
+function openTool(page) {
   window.open(page, '_blank');
 }
 
