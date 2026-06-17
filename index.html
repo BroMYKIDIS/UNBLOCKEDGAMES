@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unblocked.io - Hub</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #0b1220;
+  color: white;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  background: #0f172a;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.logo {
+  color: #38bdf8;
+  font-weight: bold;
+  font-size: 1.5em;
+  text-decoration: none;
+}
+
+nav-links {
+  display: flex;
+  gap: 25px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.3s;
+  font-size: 1em;
+}
+
+nav a:hover {
+  color: #38bdf8;
+}
+
+.hero {
+  padding: 80px 30px;
+  text-align: center;
+  background: linear-gradient(135deg, #1d4ed8, #06b6d4);
+}
+
+.hero h1 {
+  font-size: 3em;
+  margin-bottom: 20px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.hero p {
+  font-size: 1.3em;
+  opacity: 0.95;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 15px;
+  padding: 20px;
+}
+
+.card {
+  background: #111827;
+  padding: 15px;
+  border-radius: 10px;
+  transition: 0.2s;
+  border: 1px solid #1e293b;
+}
+
+.card:hover {
+  transform: scale(1.03);
+  border-color: #38bdf8;
+}
+
+.section-title {
+  padding: 20px 30px 10px;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.tool-card {
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  padding: 30px;
+  border-radius: 15px;
+  text-align: center;
+  cursor: pointer;
+  border: 2px solid #1e293b;
+  transition: 0.3s;
+  margin: 10px;
+}
+
+.tool-card:hover {
+  border-color: #38bdf8;
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(56, 189, 248, 0.2);
+}
+
+.tool-icon {
+  font-size: 3em;
+  margin-bottom: 15px;
+}
+
+.tool-name {
+  font-size: 1.3em;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #38bdf8;
+}
+
+.tool-desc {
+  color: #94a3b8;
+  font-size: 0.95em;
+}
+
+button {
+  padding: 8px 10px;
+  border: none;
+  border-radius: 6px;
+  background: #2563eb;
+  color: white;
+  cursor: pointer;
+  margin: 3px;
+  transition: 0.2s;
+}
+
+button:hover {
+  background: #1d4ed8;
+}
+
+.page {
+  display: none;
+}
+
+.page.active {
+  display: block;
+}
+
+small {
+  color: #94a3b8;
+}
+
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 30px;
+}
+
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .hero h1 {
+    font-size: 2em;
+  }
+
+  .tool-card {
+    padding: 20px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <div class="logo" onclick="show('home')" style="cursor: pointer;">🎮 Unblocked.io</div>
+  <nav-links>
+    <a onclick="show('home')">Home</a>
+    <a onclick="show('games')">Games</a>
+    <a onclick="show('tools')">Tools</a>
+    <a onclick="show('blog')">Blog</a>
+    <a onclick="show('contact')">Contact</a>
+    <a onclick="show('admin')">Admin</a>
+  </nav-links>
+</nav>
+
+<!-- HOME -->
+<div id="home" class="page active">
+  <div class="hero">
+    <h1>🎮 Unblocked.io</h1>
+    <p>Gaming Hub & Useful Tools</p>
+  </div>
+
+  <h2 class="section-title">🔥 Trending Games</h2>
+  <div class="grid" id="trending"></div>
+
+  <h2 class="section-title">🛠️ Featured Tools</h2>
+  <div class="tools-grid">
+    <div class="tool-card" onclick="show('tools')">
+      <div class="tool-icon">🕐</div>
+      <div class="tool-name">World Clock</div>
+      <div class="tool-desc">Real-time digital clock with multiple time zones</div>
+    </div>
+  </div>
+</div>
+
+<!-- GAMES -->
+<div id="games" class="page">
+  <div class="section-title">🎮 Games</div>
+  <div class="grid" id="gameList"></div>
+
+  <h2 class="section-title">⭐ Favorites</h2>
+  <div class="grid" id="favList"></div>
+</div>
+
+<!-- TOOLS -->
+<div id="tools" class="page">
+  <div class="hero">
+    <h1>🛠️ Tools</h1>
+    <p>Useful utilities for your daily needs</p>
+  </div>
+
+  <div class="tools-grid">
+    <div class="tool-card" onclick="openInNewTab('clock.html')">
+      <div class="tool-icon">🕐</div>
+      <div class="tool-name">Digital Clock</div>
+      <div class="tool-desc">Display current time in multiple time zones worldwide</div>
+      <br>
+      <button onclick="event.stopPropagation(); openInNewTab('clock.html')">Open Clock</button>
+    </div>
+  </div>
+</div>
+
+<!-- BLOG -->
+<div id="blog" class="page">
+  <div style="padding: 30px;">
+    <div class="card">
+      <h2>📰 Blog</h2>
+      <p>Welcome to Unblocked.io! This is a personal gaming hub with favorites, trending games, and useful tools.</p>
+      <h3 style="margin-top: 20px; color: #38bdf8;">Features:</h3>
+      <ul style="margin-left: 20px;">
+        <li>🎮 Manage your game library</li>
+        <li>⭐ Mark and access favorites</li>
+        <li>📊 Track game statistics</li>
+        <li>🛠️ Access useful tools</li>
+        <li>🌍 World time zone clock</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div id="contact" class="page">
+  <div style="padding: 30px;">
+    <div class="card">
+      <h2>📧 Contact</h2>
+      <p><strong>Email:</strong> quadekeefe2014@gmail.com</p>
+      <p><strong>GitHub:</strong> <a href="https://github.com/BroMYKIDIS" style="color: #38bdf8;">BroMYKIDIS</a></p>
+      <p style="margin-top: 20px; color: #94a3b8;">Feel free to reach out with questions or suggestions!</p>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN -->
+<div id="admin" class="page">
+  <div style="padding: 30px;">
+    <h2>⚙️ Admin Panel</h2>
+
+    <div class="card" style="margin: 20px 0;">
+      <h3>➕ Add New Game</h3>
+      <input id="name" placeholder="Game name" style="width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; border: none;"><br>
+      <input id="url" placeholder="Game URL" style="width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; border: none;"><br>
+      <button onclick="addGame()" style="width: 100%; padding: 12px;">Add Game</button>
+    </div>
+
+    <div class="card">
+      <h3>📊 Statistics</h3>
+      <p><strong>Total Games:</strong> <span id="totalGames">0</span></p>
+      <p><strong>Total Favorites:</strong> <span id="totalFavs">0</span></p>
+      <p><strong>Total Plays:</strong> <span id="totalPlays">0</span></p>
+    </div>
+  </div>
+</div>
+
+<script>
+let games = JSON.parse(localStorage.getItem("games") || "[]");
+let favs = JSON.parse(localStorage.getItem("favs") || "[]");
+let stats = JSON.parse(localStorage.getItem("stats") || "{}");
+
+function save() {
+  localStorage.setItem("games", JSON.stringify(games));
+  localStorage.setItem("favs", JSON.stringify(favs));
+  localStorage.setItem("stats", JSON.stringify(stats));
+  updateStats();
+}
+
+function show(page) {
+  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+  document.getElementById(page).classList.add("active");
+  if (page === 'games' || page === 'home') {
+    renderAll();
+  }
+}
+
+function openInNewTab(page) {
+  window.open(page, '_blank');
+}
+
+/* ADMIN ADD */
+function addGame() {
+  let name = document.getElementById("name").value;
+  let url = document.getElementById("url").value;
+
+  if (!name || !url) {
+    alert("Please fill in all fields");
+    return;
+  }
+
+  games.push({ id: Date.now(), name, url });
+  save();
+  document.getElementById("name").value = "";
+  document.getElementById("url").value = "";
+  renderAll();
+  alert("Game added successfully!");
+}
+
+/* PLAY */
+function play(id) {
+  let g = games.find(x => x.id === id);
+  stats[id] = (stats[id] || 0) + 1;
+  save();
+  window.open(g.url, "_blank");
+}
+
+/* FAVORITE */
+function fav(id) {
+  let g = games.find(x => x.id === id);
+  if (!favs.find(x => x.id === id)) {
+    favs.push(g);
+    save();
+  }
+  renderFavs();
+}
+
+/* RENDER */
+function renderGames() {
+  let el = document.getElementById("gameList");
+  if (!el) return;
+
+  el.innerHTML = "";
+  games.forEach(g => {
+    el.innerHTML += `
+      <div class="card">
+        <h3>${g.name}</h3>
+        <small>🔥 ${stats[g.id] || 0} plays</small><br><br>
+        <button onclick="play(${g.id})">Play</button>
+        <button onclick="fav(${g.id})">⭐</button>
+      </div>
+    `;
+  });
+}
+
+function renderFavs() {
+  let el = document.getElementById("favList");
+  if (!el) return;
+
+  el.innerHTML = "";
+  favs.forEach(f => {
+    el.innerHTML += `<div class="card">⭐ ${f.name}</div>`;
+  });
+}
+
+function renderTrending() {
+  let el = document.getElementById("trending");
+  if (!el) return;
+
+  let sorted = [...games].sort((a, b) => {
+    return (stats[b.id] || 0) - (stats[a.id] || 0);
+  });
+
+  el.innerHTML = "";
+  sorted.slice(0, 6).forEach(g => {
+    el.innerHTML += `
+      <div class="card">
+        <b>${g.name}</b><br>
+        🔥 ${stats[g.id] || 0}
+      </div>
+    `;
+  });
+}
+
+function renderAll() {
+  renderGames();
+  renderFavs();
+  renderTrending();
+  updateStats();
+}
+
+function updateStats() {
+  let totalPlays = Object.values(stats).reduce((a, b) => a + b, 0);
+  document.getElementById("totalGames").textContent = games.length;
+  document.getElementById("totalFavs").textContent = favs.length;
+  document.getElementById("totalPlays").textContent = totalPlays;
+}
+
+renderAll();
+</script>
+
+</body>
+</html>
