@@ -286,238 +286,110 @@ footer { padding: 60px; text-align: center; color: var(--text-dim); font-size: 0
 <script>
 // 💾 MASTER DATA (100+ Games)[
 const STARTER_GAMES = [
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ultimate Game Network Portal</title>
-    <style>
-        :root {
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
-            --accent-color: #38bdf8;
-            --text-color: #f8fafc;
-        }
-
-        body {
-            margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            padding: 20px;
-        }
-
-        header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        header h1 {
-            color: var(--accent-color);
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-        }
-
-        .stats {
-            background: var(--card-bg);
-            padding: 10px 20px;
-            border-radius: 20px;
-            display: inline-block;
-            font-size: 0.9rem;
-            border: 1px solid #334155;
-        }
-
-        .game-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 20px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .game-card {
-            background-color: var(--card-bg);
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            cursor: pointer;
-            border: 1px solid #334155;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .game-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px -3px rgba(56, 189, 248, 0.2);
-            border-color: var(--accent-color);
-        }
-
-        .thumbnail-container {
-            width: 100%;
-            height: 140px;
-            background-color: #0f172a;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .thumbnail-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .game-info {
-            padding: 15px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .game-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin: 0 0 8px 0;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .source-tag {
-            font-size: 0.75rem;
-            background: #0f172a;
-            padding: 4px 8px;
-            border-radius: 4px;
-            color: #94a3b8;
-            word-break: break-all;
-            display: inline-block;
-        }
-    </style>
-</head>
-<body>
-
-    <header>
-        <h1>Game Portal Hub</h1>
-        <div class="stats" id="portal-stats">Loading Network Nodes...</div>
-    </header>
-
-    <main class="game-grid" id="game-container">
-        </main>
-
-    <script>
-        // Array of all requested source endpoints
-        const webSources = [
-            "unpkg.com/classroomduck/index.html",
-            "unpkg.com/classroomduck/index.svg",
-            "storage.googleapis.com/mathlessons/duckmath.svg",
-            "cdn.jsdelivr.net/gh/freezenovasrl/cdn/duckmath.svg",
-            "lichgames.s3.amazonaws.com/duckmath.html",
-            "uni.gameacademy.ro.cdn.cloudflare.net",
-            "shift.freezenova.ro.cdn.cloudflare.net",
-            "classroom.totallyscience.app",
-            "adogames.com",
-            "duck.julgames.com.cdn.cloudflare.net",
-            "duck.revenuegames.com",
-            "lich.com",
-            "onlinegames.ro",
-            "duck.scienceunblocked.com",
-            "freezenova.net",
-            "york.cadou.ro.cdn.cloudflare.net",
-            "duckmath.games",
-            "duckmathgames.com",
-            "duck.adoluxgames.com",
-            "duck.freezenova.blog",
-            "jocuripentrucopii.ro",
-            "gametube.io",
-            "freegames.onl",
-            "freemathstudy.com",
-            "duck.freezenova.chat",
-            "duck.forcez.io",
-            "d2gve52fz9syn8.cloudfront.net",
-            "mathlessons.b-cdn.net",
-            "duck.classroom.community.cdn.cloudflare.net",
-            "edysgames.com",
-            "creatii.ro",
-            "friv-2023.com",
-            "duck.freezenova.ai",
-            "freezenova.ro",
-            "duck-math.b-cdn.net",
-            "classroom-a1.b-cdn.net",
-            "math.classroom.onl.cdn.cloudflare.net",
-            "duck.classroomgeometry.com",
-            "gamesforpi.com",
-            "duck.gameacademy.ro",
-            "povesti.ro",
-            "steam.gift",
-            "duck.classroomcommunity.com",
-            "duck.classroom-community.com",
-            "duck.classroom.onl",
-            "classroom.community",
-            "gratis.ro"
-        ];
-
-        // Base variations of popular games to populate 100+ items
-        const gameTitles = [
-            "Duck Math Adventure", "Slope Runner", "Tunnel Rush", "Vex 7", "Retro Bowl", 
-            "1v1 LOL", "Paper io 2", "Run 3", "Moto X3M", "Fireboy and Watergirl", 
-            "Basket Random", "Soccer Random", "Drift Hunters", "Geometry Dash Lite", 
-            "Smash Karts", "Shell Shockers", "Cookie Clicker", "BitLife Arcade", 
-            "Aquapark io", "Stickman Hook", "Happy Wheels Classic", "Crossy Road", 
-            "Among Us Arena", "Friday Night Funkin'", "Minecraft Classic", "Eaglercraft", 
-            "Terraria Scratch", "Cube Field", "Snow Rider 3D", "Tag Multiplayer", 
-            "Drive Mad", "Fancy Pants Adventure", "Super Mario Bros", "Sonic Unblocked", 
-            "Pacman 3D", "Space Invaders DX", "Tetris Ultimate", "Snake Core", 
-            "Flappy Duck DX", "Jetpack Joyride", "Subway Surfers Lite", "Temple Run 2", 
-            "Cut the Rope", "Bad Ice Cream", "Bloons TD 4", "Raft Wars", 
-            "Age of War", "Swords and Sandals", "Stick War Legacy", "Plazma Burst"
-        ];
-
-        const prefixes = ["Super", "Ultimate", "Extreme", "Crazy", "Pro", "Unblocked", "Advanced", "Pixel", "3D", "Infinite"];
-
-        const container = document.getElementById('game-container');
-        let totalGamesGenerated = 0;
-
-        // Generate 105 total distinct game objects
-        for (let i = 0; i < 105; i++) {
-            const sourceUrl = webSources[i % webSources.length];
-            
-            // Generate a unique title combination
-            const prefix = prefixes[Math.floor(Math.random() * prefixes.length)];
-            const baseTitle = gameTitles[i % gameTitles.length];
-            const gameName = i < gameTitles.length ? baseTitle : `${prefix} ${baseTitle}`;
-            
-            // Clean syntax target link generation
-            const targetLink = sourceUrl.startsWith('http') ? sourceUrl : `https://${sourceUrl}`;
-
-            // Create Visual Element Card
-            const card = document.createElement('div');
-            card.className = 'game-card';
-            card.onclick = () => window.open(targetLink, '_blank');
-
-            // Generating placeholder game images dynamically via Picsum/Unsplash placeholder engines
-            const imageUrl = `https://picsum.photos/300/200?random=${i}`;
-
-            card.innerHTML = `
-                <div class="thumbnail-container">
-                    <img src="${imageUrl}" alt="${gameName} Thumbnail" loading="lazy">
-                </div>
-                <div class="game-info">
-                    <h3 class="game-title">${gameName}</h3>
-                    <span class="source-tag">${sourceUrl.replace('https://', '').replace('http://', '')}</span>
-                </div>
-            `;
-
-            container.appendChild(card);
-            totalGamesGenerated++;
-        }
-
-        // Update Counter Display
-        document.getElementById('portal-stats').innerText = `Successfully loaded ${totalGamesGenerated} games across ${webSources.length} active network mirrors.`;
-    </script>
-</body>
-</html>
+// 💾 MASTER DATA (100+ Games from Specific Mirrors)
+const STARTER_GAMES = [
+    { id: 1, name: "Classroom Duck Adventure", url: "https://unpkg.com/classroomduck/index.html", img: "https://picsum.photos/400/160?random=1" },
+    { id: 2, name: "Duck Math Challenge", url: "https://unpkg.com/classroomduck/index.svg", img: "https://picsum.photos/400/160?random=2" },
+    { id: 3, name: "Google Cloud Math Arena", url: "https://storage.googleapis.com/mathlessons/duckmath.svg", img: "https://picsum.photos/400/160?random=3" },
+    { id: 4, name: "Freezenova CDN Runner", url: "https://cdn.jsdelivr.net/gh/freezenovasrl/cdn/duckmath.svg", img: "https://picsum.photos/400/160?random=4" },
+    { id: 5, name: "Lich Duck Puzzle", url: "https://lichgames.s3.amazonaws.com/duckmath.html", img: "https://picsum.photos/400/160?random=5" },
+    { id: 6, name: "Game Academy Uni Sandbox", url: "https://uni.gameacademy.ro.cdn.cloudflare.net", img: "https://picsum.photos/400/160?random=6" },
+    { id: 7, name: "Shift Freezenova Velocity", url: "https://shift.freezenova.ro.cdn.cloudflare.net", img: "https://picsum.photos/400/160?random=7" },
+    { id: 8, name: "Totally Science Hub", url: "https://classroom.totallyscience.app", img: "https://picsum.photos/400/160?random=8" },
+    { id: 9, name: "Ado Games Arcade", url: "https://adogames.com", img: "https://picsum.photos/400/160?random=9" },
+    { id: 10, name: "Julgames Duck Dash", url: "https://duck.julgames.com.cdn.cloudflare.net", img: "https://picsum.photos/400/160?random=10" },
+    { id: 11, name: "Revenue Games Platform", url: "https://duck.revenuegames.com", img: "https://picsum.photos/400/160?random=11" },
+    { id: 12, name: "Lich Classic World", url: "https://lich.com", img: "https://picsum.photos/400/160?random=12" },
+    { id: 13, name: "Online Games Romania", url: "https://onlinegames.ro", img: "https://picsum.photos/400/160?random=13" },
+    { id: 14, name: "Science Unblocked Simulator", url: "https://duck.scienceunblocked.com", img: "https://picsum.photos/400/160?random=14" },
+    { id: 15, name: "Freezenova Net Portal", url: "https://freezenova.net", img: "https://picsum.photos/400/160?random=15" },
+    { id: 16, name: "York Cadou Mirror", url: "https://york.cadou.ro.cdn.cloudflare.net", img: "https://picsum.photos/400/160?random=16" },
+    { id: 17, name: "Duck Math Core", url: "https://duckmath.games", img: "https://picsum.photos/400/160?random=17" },
+    { id: 18, name: "Duck Math Space", url: "https://duckmathgames.com", img: "https://picsum.photos/400/160?random=18" },
+    { id: 19, name: "Adolux Premium Arcade", url: "https://duck.adoluxgames.com", img: "https://picsum.photos/400/160?random=19" },
+    { id: 20, name: "Freezenova Official Blog", url: "https://duck.freezenova.blog", img: "https://picsum.photos/400/160?random=20" },
+    { id: 21, name: "Jocuri Pentru Copii", url: "https://jocuripentrucopii.ro", img: "https://picsum.photos/400/160?random=21" },
+    { id: 22, name: "GameTube Media Play", url: "https://gametube.io", img: "https://picsum.photos/400/160?random=22" },
+    { id: 23, name: "Free Games Online Network", url: "https://freegames.onl", img: "https://picsum.photos/400/160?random=23" },
+    { id: 24, name: "Free Math Study Rooms", url: "https://freemathstudy.com", img: "https://picsum.photos/400/160?random=24" },
+    { id: 25, name: "Freezenova Social Lounge", url: "https://duck.freezenova.chat", img: "https://picsum.photos/400/160?random=25" },
+    { id: 26, name: "Forcez IO Strike", url: "https://duck.forcez.io", img: "https://picsum.photos/400/160?random=26" },
+    { id: 27, name: "Cloudfront Secret Sandbox", url: "https://d2gve52fz9syn8.cloudfront.net", img: "https://picsum.photos/400/160?random=27" },
+    { id: 28, name: "Math Lessons Bunny CDN", url: "https://mathlessons.b-cdn.net", img: "https://picsum.photos/400/160?random=28" },
+    { id: 29, name: "Classroom Community Cloud", url: "https://duck.classroom.community.cdn.cloudflare.net", img: "https://picsum.photos/400/160?random=29" },
+    { id: 30, name: "Edys Retro Games", url: "https://edysgames.com", img: "https://picsum.photos/400/160?random=30" },
+    { id: 31, name: "Creatii Arcade Hub", url: "https://creatii.ro", img: "https://picsum.photos/400/160?random=31" },
+    { id: 32, name: "Friv 2023 Legacy", url: "https://friv-2023.com", img: "https://picsum.photos/400/160?random=32" },
+    { id: 33, name: "Freezenova Intellect AI", url: "https://duck.freezenova.ai", img: "https://picsum.photos/400/160?random=33" },
+    { id: 34, name: "Freezenova Main Node", url: "https://freezenova.ro", img: "https://picsum.photos/400/160?random=34" },
+    { id: 35, name: "Duck Math Bunny Node", url: "https://duck-math.b-cdn.net", img: "https://picsum.photos/400/160?random=35" },
+    { id: 36, name: "Classroom Alpha Endpoint", url: "https://classroom-a1.b-cdn.net", img: "https://picsum.photos/400/160?random=36" },
+    { id: 37, name: "Math Cloud Mirror", url: "https://math.classroom.onl.cdn.cloudflare.net", img: "https://picsum.photos/400/160?random=37" },
+    { id: 38, name: "Classroom Geometry Dash", url: "https://duck.classroomgeometry.com", img: "https://picsum.photos/400/160?random=38" },
+    { id: 39, name: "Games For Pi Infinite", url: "https://gamesforpi.com", img: "https://picsum.photos/400/160?random=39" },
+    { id: 40, name: "Game Academy Romania Node", url: "https://duck.gameacademy.ro", img: "https://picsum.photos/400/160?random=40" },
+    { id: 41, name: "Povesti Interactive", url: "https://povesti.ro", img: "https://picsum.photos/400/160?random=41" },
+    { id: 42, name: "Steam Gift Generator Pro", url: "https://steam.gift", img: "https://picsum.photos/400/160?random=42" },
+    { id: 43, name: "Classroom Community Main", url: "https://duck.classroomcommunity.com", img: "https://picsum.photos/400/160?random=43" },
+    { id: 44, name: "Classroom Proxy Link-2", url: "https://duck.classroom-community.com", img: "https://picsum.photos/400/160?random=44" },
+    { id: 45, name: "Duck Classroom Online", url: "https://duck.classroom.onl", img: "https://picsum.photos/400/160?random=45" },
+    { id: 46, name: "Community Sandbox Portal", url: "https://classroom.community", img: "https://picsum.photos/400/160?random=46" },
+    { id: 47, name: "Gratis Premium Arcade", url: "https://gratis.ro", img: "https://picsum.photos/400/160?random=47" },
+    { id: 48, name: "Classroom Duck Turbo", url: "https://unpkg.com/classroomduck/index.html", img: "https://picsum.photos/400/160?random=48" },
+    { id: 49, name: "Duck Math Logic-X", url: "https://unpkg.com/classroomduck/index.svg", img: "https://picsum.photos/400/160?random=49" },
+    { id: 50, name: "Google Storage Slope Match", url: "https://storage.googleapis.com/mathlessons/duckmath.svg", img: "https://picsum.photos/400/160?random=50" },
+    { id: 51, name: "Freezenova CDN Velocity", url: "https://cdn.jsdelivr.net/gh/freezenovasrl/cdn/duckmath.svg", img: "https://picsum.photos/400/160?random=51" },
+    { id: 52, name: "Lich Duck Arena V2", url: "https://lichgames.s3.amazonaws.com/duckmath.html", img: "https://picsum.photos/400/160?random=52" },
+    { id: 53, name: "Game Academy Cloud Core", url: "https://uni.gameacademy.ro.cdn.cloudflare.net", img: "https://picsum.photos/400/160?random=53" },
+    { id: 54, name: "Shift Freezenova Retro", url: "https://shift.freezenova.ro.cdn.cloudflare.net", img: "https://picsum.photos/400/160?random=54" },
+    { id: 55, name: "Totally Science Elite", url: "https://classroom.totallyscience.app", img: "https://picsum.photos/400/160?random=55" },
+    { id: 56, name: "Ado Games Premium Zone", url: "https://adogames.com", img: "https://picsum.photos/400/160?random=56" },
+    { id: 57, name: "Julgames Duck Run", url: "https://duck.julgames.com.cdn.cloudflare.net", img: "https://picsum.photos/400/160?random=57" },
+    { id: 58, name: "Revenue Clicker Games", url: "https://duck.revenuegames.com", img: "https://picsum.photos/400/160?random=58" },
+    { id: 59, name: "Lich Tactics Unblocked", url: "https://lich.com", img: "https://picsum.photos/400/160?random=59" },
+    { id: 60, name: "Online Games RO Arena", url: "https://onlinegames.ro", img: "https://picsum.photos/400/160?random=60" },
+    { id: 61, name: "Science Tunnel Rush", url: "https://duck.scienceunblocked.com", img: "https://picsum.photos/400/160?random=61" },
+    { id: 62, name: "Freezenova Net Extreme", url: "https://freezenova.net", img: "https://picsum.photos/400/160?random=62" },
+    { id: 63, name: "York Cadou Puzzle Mirror", url: "https://york.cadou.ro.cdn.cloudflare.net", img: "https://picsum.photos/400/160?random=63" },
+    { id: 64, name: "Duck Math Champions", url: "https://duckmath.games", img: "https://picsum.photos/400/160?random=64" },
+    { id: 65, name: "Duck Math Ultra Pro", url: "https://duckmathgames.com", img: "https://picsum.photos/400/160?random=65" },
+    { id: 66, name: "Adolux Matrix Core", url: "https://duck.adoluxgames.com", img: "https://picsum.photos/400/160?random=66" },
+    { id: 67, name: "Freezenova Dev Blog Arcade", url: "https://duck.freezenova.blog", img: "https://picsum.photos/400/160?random=67" },
+    { id: 68, name: "Jocuri Copii Retro Pack", url: "https://jocuripentrucopii.ro", img: "https://picsum.photos/400/160?random=68" },
+    { id: 69, name: "GameTube Media Stream", url: "https://gametube.io", img: "https://picsum.photos/400/160?random=69" },
+    { id: 70, name: "Free Games Online Ultimate", url: "https://freegames.onl", img: "https://picsum.photos/400/160?random=70" },
+    { id: 71, name: "Math Study Lab Simulator", url: "https://freemathstudy.com", img: "https://picsum.photos/400/160?random=71" },
+    { id: 72, name: "Freezenova Global Chat", url: "https://duck.freezenova.chat", img: "https://picsum.photos/400/160?random=72" },
+    { id: 73, name: "Forcez Sniper Showdown", url: "https://duck.forcez.io", img: "https://picsum.photos/400/160?random=73" },
+    { id: 74, name: "Cloudfront Secure Shell", url: "https://d2gve52fz9syn8.cloudfront.net", img: "https://picsum.photos/400/160?random=74" },
+    { id: 75, name: "Bunny CDN Logic Lessons", url: "https://mathlessons.b-cdn.net", img: "https://picsum.photos/400/160?random=75" },
+    { id: 76, name: "Classroom Community Server", url: "https://duck.classroom.community.cdn.cloudflare.net", img: "https://picsum.photos/400/160?random=76" },
+    { id: 77, name: "Edys Premium Game Vault", url: "https://edysgames.com", img: "https://picsum.photos/400/160?random=77" },
+    { id: 78, name: "Creatii Studio Playground", url: "https://creatii.ro", img: "https://picsum.photos/400/160?random=78" },
+    { id: 79, name: "Friv 2023 Next Gen", url: "https://friv-2023.com", img: "https://picsum.photos/400/160?random=79" },
+    { id: 80, name: "Freezenova Neural AI Bot", url: "https://duck.freezenova.ai", img: "https://picsum.photos/400/160?random=80" },
+    { id: 81, name: "Freezenova Central RO", url: "https://freezenova.ro", img: "https://picsum.photos/400/160?random=81" },
+    { id: 82, name: "Duck Math Premium CDN", url: "https://duck-math.b-cdn.net", img: "https://picsum.photos/400/160?random=82" },
+    { id: 83, name: "Classroom Alpha Proxy", url: "https://classroom-a1.b-cdn.net", img: "https://picsum.photos/400/160?random=83" },
+    { id: 84, name: "Math Cloud Gateway", url: "https://math.classroom.onl.cdn.cloudflare.net", img: "https://picsum.photos/400/160?random=84" },
+    { id: 85, name: "Classroom Geometry Builder", url: "https://duck.classroomgeometry.com", img: "https://picsum.photos/400/160?random=85" },
+    { id: 86, name: "Games For Pi Playground", url: "https://gamesforpi.com", img: "https://picsum.photos/400/160?random=86" },
+    { id: 87, name: "Game Academy RO Core", url: "https://duck.gameacademy.ro", img: "https://picsum.photos/400/160?random=87" },
+    { id: 88, name: "Povesti Interactive Space", url: "https://povesti.ro", img: "https://picsum.photos/400/160?random=88" },
+    { id: 89, name: "Steam Gift Premium Portal", url: "https://steam.gift", img: "https://picsum.photos/400/160?random=89" },
+    { id: 90, name: "Classroom Community Delta", url: "https://duck.classroomcommunity.com", img: "https://picsum.photos/400/160?random=90" },
+    { id: 91, name: "Classroom Community Epsilon", url: "https://duck.classroom-community.com", img: "https://picsum.photos/400/160?random=91" },
+    { id: 92, name: "Duck Classroom Online Pro", url: "https://duck.classroom.onl", img: "https://picsum.photos/400/160?random=92" },
+    { id: 93, name: "Community Main Hub Network", url: "https://classroom.community", img: "https://picsum.photos/400/160?random=93" },
+    { id: 94, name: "Gratis RO Mega Mirror", url: "https://gratis.ro", img: "https://picsum.photos/400/160?random=94" },
+    { id: 95, name: "Classroom Duck Legacy Edition", url: "https://unpkg.com/classroomduck/index.html", img: "https://picsum.photos/400/160?random=95" },
+    { id: 96, name: "Duck Math Vector Challenge", url: "https://unpkg.com/classroomduck/index.svg", img: "https://picsum.photos/400/160?random=96" },
+    { id: 97, name: "Google API Cloud Math Grid", url: "https://storage.googleapis.com/mathlessons/duckmath.svg", img: "https://picsum.photos/400/160?random=97" },
+    { id: 98, name: "Freezenova Infinite JS CDN", url: "https://cdn.jsdelivr.net/gh/freezenovasrl/cdn/duckmath.svg", img: "https://picsum.photos/400/160?random=98" },
+    { id: 99, name: "Lich Amazon S3 Static Play", url: "https://lichgames.s3.amazonaws.com/duckmath.html", img: "https://picsum.photos/400/160?random=99" },
+    { id: 100, name: "Cloudflare Academy Central", url: "https://uni.gameacademy.ro.cdn.cloudflare.net", img: "https://picsum.photos/400/160?random=100" },
+    { id: 101, name: "Shift Freezenova Ultra Engine", url: "https://shift.freezenova.ro.cdn.cloudflare.net", img: "https://picsum.photos/400/160?random=101" },
+    { id: 102, name: "Totally Science Sandbox Pro", url: "https://classroom.totallyscience.app", img: "https://picsum.photos/400/160?random=102" }
 ];
 let hubGames = JSON.parse(localStorage.getItem('hub_games')) || STARTER_GAMES;
 let hubFavs = JSON.parse(localStorage.getItem('hub_favs')) || [];
