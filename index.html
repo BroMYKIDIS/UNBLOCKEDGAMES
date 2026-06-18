@@ -1,265 +1,467 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="midnight">
+<html lang="en" data-theme="cyberpunk">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Unblocked.io - MEGA HUB</title>
+<title>Unblocked.io - The Ultimate Gaming Hub</title>
 <style>
-:root { --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+/* 
+========================================
+   MASTER CSS VARIABLES & THEMES
+========================================
+*/
+:root { --t: 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
 
-/* 🎨 THEME ENGINE */
-[data-theme="cyberpunk"] { --bg: #050505; --nav: #0d0d0d; --card: #151515; --accent: #00f2ff; --text: #ffffff; --text-dim: #888; --shadow: 0 0 15px rgba(0, 242, 255, 0.3); }
-[data-theme="midnight"] { --bg: #0f172a; --nav: #1e293b; --card: #334155; --accent: #38bdf8; --text: #f8fafc; --text-dim: #94a3b8; --shadow: 0 10px 15px rgba(0,0,0,0.3); }
-[data-theme="emerald"] { --bg: #064e3b; --nav: #065f46; --card: #059669; --accent: #34d399; --text: #ecfdf5; --text-dim: #a7f3d0; --shadow: 0 0 15px rgba(52, 211, 153, 0.3); }
-[data-theme="sunset"] { --bg: #451a03; --nav: #78350f; --card: #92400e; --accent: #fbbf24; --text: #fffbeb; --text-dim: #fef3c7; --shadow: 0 0 15px rgba(251, 191, 36, 0.3); }
+[data-theme="cyberpunk"] {
+    --bg: #050505; --nav: #0d0d0d; --card: #121212; --accent: #00f2ff;
+    --text: #ffffff; --text-dim: #888; --shadow: 0 0 20px rgba(0, 242, 255, 0.4);
+    --btn-text: #000; --glass: rgba(255, 255, 255, 0.03);
+}
+[data-theme="midnight"] {
+    --bg: #0f172a; --nav: #1e293b; --card: #111827; --accent: #818cf8;
+    --text: #f8fafc; --text-dim: #94a3b8; --shadow: 0 10px 25px rgba(0,0,0,0.4);
+    --btn-text: #fff; --glass: rgba(255, 255, 255, 0.05);
+}
+[data-theme="emerald"] {
+    --bg: #022c22; --nav: #064e3b; --card: #065f46; --accent: #34d399;
+    --text: #ecfdf5; --text-dim: #6ee7b7; --shadow: 0 0 15px rgba(52, 211, 153, 0.3);
+    --btn-text: #000; --glass: rgba(255, 255, 255, 0.07);
+}
+[data-theme="sunset"] {
+    --bg: #451a03; --nav: #78350f; --card: #92400e; --accent: #fbbf24;
+    --text: #fffbeb; --text-dim: #fcd34d; --shadow: 0 5px 15px rgba(251, 191, 36, 0.4);
+    --btn-text: #000; --glass: rgba(0, 0, 0, 0.2);
+}
 
+/* 
+========================================
+   BASE STYLES
+========================================
+*/
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--text); transition: background var(--transition); line-height: 1.6; }
+body { 
+    font-family: 'Inter', system-ui, -apple-system, sans-serif; 
+    background: var(--bg); color: var(--text); 
+    transition: background var(--t), color var(--t);
+    overflow-x: hidden;
+}
 
-nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 5%; background: var(--nav); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid rgba(255,255,255,0.05); backdrop-filter: blur(10px); }
-.logo { font-size: 1.5rem; font-weight: 800; color: var(--accent); cursor: pointer; }
+/* 🧭 NAVIGATION */
+nav {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1rem 5%; background: var(--nav); position: sticky; top: 0; z-index: 1000;
+    border-bottom: 1px solid rgba(255,255,255,0.05); backdrop-filter: blur(15px);
+}
+.logo { font-size: 1.8rem; font-weight: 900; color: var(--accent); cursor: pointer; text-transform: uppercase; letter-spacing: 2px; }
 nav-links { display: flex; gap: 1.5rem; }
 nav a { text-decoration: none; color: var(--text-dim); font-weight: 600; cursor: pointer; transition: 0.2s; font-size: 0.9rem; }
-nav a:hover, nav a.active { color: var(--accent); }
+nav a:hover, nav a.active { color: var(--accent); text-shadow: var(--shadow); }
 
-.breadcrumb { background: rgba(0,0,0,0.2); padding: 0.6rem 5%; font-size: 0.8rem; color: var(--text-dim); border-bottom: 1px solid rgba(255,255,255,0.03); }
-.breadcrumb span { color: var(--accent); font-weight: bold; }
+.breadcrumb { background: var(--glass); padding: 0.8rem 5%; font-size: 0.85rem; color: var(--text-dim); border-bottom: 1px solid rgba(255,255,255,0.03); }
+.breadcrumb b { color: var(--accent); }
 
-.hero { padding: 40px 5%; text-align: center; background: linear-gradient(180deg, var(--nav) 0%, var(--bg) 100%); }
-.section-header { padding: 1rem 5%; font-size: 1.5rem; color: var(--accent); border-left: 5px solid var(--accent); margin: 20px 5%; background: rgba(255,255,255,0.02); }
-
-.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.5rem; padding: 1rem 5%; }
-.card { background: var(--card); border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.05); transition: var(--transition); cursor: pointer; display: flex; flex-direction: column; }
-.card:hover { transform: translateY(-5px); border-color: var(--accent); box-shadow: var(--shadow); }
-.card-img { width: 100%; height: 130px; background: #000; object-fit: cover; }
-.card-info { padding: 1rem; flex-grow: 1; text-align: center; }
-.card-title { font-size: 1rem; font-weight: 700; }
-
-.page { display: none; min-height: 80vh; animation: fadeIn 0.3s ease; }
+/* 🏠 PAGES & LAYOUT */
+.page { display: none; min-height: 100vh; animation: pageFade 0.4s ease-out; }
 .page.active { display: block; }
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes pageFade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-.tool-box { background: var(--nav); padding: 2rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.05); max-width: 600px; margin: 20px auto; }
-input, textarea { width: 100%; padding: 12px; margin: 10px 0; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.2); color: white; }
-.btn-action { background: var(--accent); color: #000; border: none; padding: 12px; border-radius: 8px; font-weight: 700; cursor: pointer; width: 100%; margin-top: 10px; }
+.hero { padding: 80px 5%; text-align: center; background: linear-gradient(180deg, var(--nav) 0%, var(--bg) 100%); }
+.hero h1 { font-size: 4rem; margin-bottom: 1rem; font-weight: 900; }
+.hero p { color: var(--text-dim); font-size: 1.2rem; max-width: 700px; margin: 0 auto; }
 
-footer { padding: 40px; text-align: center; color: var(--text-dim); font-size: 0.8rem; border-top: 1px solid rgba(255,255,255,0.05); }
+.section-header { padding: 3rem 5% 0.5rem; font-size: 1.8rem; font-weight: 800; color: var(--accent); display: flex; align-items: center; gap: 15px; }
+.section-header::after { content: ''; height: 2px; flex-grow: 1; background: linear-gradient(90deg, var(--accent), transparent); opacity: 0.3; }
+
+/* 🎮 GAME CARDS */
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 2rem; padding: 2rem 5%; }
+.card { 
+    background: var(--card); border-radius: 20px; overflow: hidden; border: 1px solid rgba(255,255,255,0.05);
+    transition: var(--t); cursor: pointer; position: relative; display: flex; flex-direction: column;
+}
+.card:hover { transform: translateY(-10px); border-color: var(--accent); box-shadow: var(--shadow); }
+.card-img { width: 100%; height: 160px; background: #000; object-fit: cover; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.card-info { padding: 1.2rem; flex-grow: 1; display: flex; flex-direction: column; align-items: center; text-align: center; }
+.card-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem; color: var(--text); }
+.fav-icon { position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.6); padding: 5px; border-radius: 50%; color: #fbbf24; z-index: 10; border: none; cursor: pointer; }
+
+/* 📰 BLOG */
+.blog-card { max-width: 800px; margin: 2rem auto; background: var(--nav); padding: 2.5rem; border-radius: 24px; border: 1px solid rgba(255,255,255,0.05); text-align: left; }
+.blog-card h3 { color: var(--accent); font-size: 1.5rem; margin-bottom: 1rem; }
+.blog-card p { color: var(--text-dim); line-height: 1.8; margin-bottom: 1.5rem; }
+
+/* 🛠️ TOOLS UI */
+.tool-container { max-width: 500px; margin: 50px auto; padding: 40px; background: var(--card); border-radius: 30px; border: 2px solid var(--accent); text-align: center; box-shadow: var(--shadow); }
+.btn-accent { background: var(--accent); color: var(--btn-text); border: none; padding: 12px 25px; border-radius: 12px; font-weight: 800; cursor: pointer; transition: 0.2s; width: 100%; margin-top: 15px; }
+.btn-accent:hover { transform: scale(1.02); opacity: 0.9; }
+
+.calc-display { background: #000; padding: 25px; font-size: 2.5rem; text-align: right; border-radius: 15px; margin-bottom: 20px; color: var(--accent); font-family: 'Courier New', monospace; border: 1px solid rgba(255,255,255,0.1); }
+.calc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.calc-btn { padding: 18px; border-radius: 10px; border: none; font-size: 1.2rem; cursor: pointer; background: #1e293b; color: white; transition: 0.2s; }
+.calc-btn:hover { background: #334155; }
+
+/* 🎫 SUPPORT & ADMIN */
+.input-field { width: 100%; padding: 14px; margin: 10px 0; border-radius: 10px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.3); color: white; outline: none; font-size: 1rem; }
+.input-field:focus { border-color: var(--accent); }
+
+/* FOOTER */
+footer { padding: 60px; text-align: center; color: var(--text-dim); font-size: 0.9rem; border-top: 1px solid rgba(255,255,255,0.05); }
+
+/* 🌓 MODALS */
+.modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 2000; align-items: center; justify-content: center; padding: 20px; }
+.modal-content { background: var(--nav); padding: 40px; border-radius: 25px; width: 100%; max-width: 400px; text-align: center; border: 1px solid var(--accent); box-shadow: var(--shadow); }
+
+#toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: var(--accent); color: #000; padding: 12px 30px; border-radius: 50px; font-weight: bold; display: none; z-index: 10000; box-shadow: var(--shadow); }
 </style>
 </head>
 <body>
 
+<div id="toast">Notification!</div>
+
 <nav>
-  <div class="logo" onclick="show('home')">MEGAHUB.IO</div>
-  <nav-links>
-    <a onclick="show('home')">Home</a>
-    <a onclick="show('games')">Games</a>
-    <a onclick="show('tools')">Tools</a>
-    <a onclick="show('support')">Tickets</a>
-    <a onclick="show('settings')">Settings</a>
-    <a onclick="openAdminModal()">Admin</a>
-  </nav-links>
+    <div class="logo" onclick="show('home')">HUB.IO</div>
+    <nav-links id="mainNav">
+        <a onclick="show('home')">Home</a>
+        <a onclick="show('games')">Games</a>
+        <a onclick="show('tools')">Tools</a>
+        <a onclick="show('support')">Support</a>
+        <a onclick="show('settings')">Settings</a>
+        <a onclick="openAdminModal()">Admin</a>
+    </nav-links>
 </nav>
 
 <div class="breadcrumb">Path: <span id="curPath">Home</span></div>
 
-<!-- PAGES -->
+<!-- 🏠 HOME PAGE -->
 <div id="home" class="page active">
-  <div class="hero"><h1>Ultimate Gaming Hub</h1><p>50+ Unblocked games from Cool Math, Math Playground & GitHub.</p></div>
-  <div class="section-header">🔥 TRENDING</div>
-  <div id="trendingGrid" class="grid"></div>
+    <div class="hero">
+        <h1>Welcome Hub.</h1>
+        <p>Premium unblocked access to 50+ hand-picked titles and productivity essentials.</p>
+    </div>
+
+    <div class="blog-card">
+        <h3>🚀 Update: The MEGA-Library is here!</h3>
+        <p>We've successfully added 50+ games including GitHub mirrors for Minecraft, Run 3, and Retro Bowl. All links are checked daily to ensure they bypass most unblocking filters.</p>
+        <button class="btn-accent" style="width: auto;" onclick="show('games')">Browse Games</button>
+    </div>
+
+    <div class="section-header">🔥 Trending Now</div>
+    <div id="trendingGrid" class="grid"></div>
 </div>
 
+<!-- 🎮 GAMES PAGE -->
 <div id="games" class="page">
-  <div class="section-header">🕹️ ALL GAMES (50+)</div>
-  <div id="fullGamesGrid" class="grid"></div>
+    <div class="section-header">⭐ Your Favorites</div>
+    <div id="favsGrid" class="grid"></div>
+
+    <div class="section-header">🕹️ Complete Library (50+ Games)</div>
+    <div id="allGamesGrid" class="grid"></div>
 </div>
 
+<!-- 🛠️ TOOLS HUB -->
 <div id="tools" class="page">
-    <div class="section-header">🛠️ UTILITIES</div>
-    <div class="grid" id="toolsGrid"></div>
-</div>
-
-<!-- TOOLS (Logic Shared) -->
-<div id="tool-calculator" class="page">
-    <div class="tool-box" style="max-width:350px;">
-        <h2 style="text-align:center">Calculator</h2>
-        <div id="calcDisplay" style="background:#000; padding:20px; font-size:2rem; text-align:right; margin:15px 0; color:var(--accent); border-radius:10px;">0</div>
-        <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:10px;">
-            <button onclick="cClear()" style="grid-column:span 2; background:red; color:white; padding:10px; border-radius:5px;">AC</button>
-            <button onclick="cDel()" style="background:#334155; color:white; padding:10px; border-radius:5px;">DEL</button>
-            <button onclick="cAdd('/')" style="background:var(--accent); padding:10px; border-radius:5px;">÷</button>
-            <button onclick="cAdd('7')" style="background:#1e293b; color:white; padding:10px; border-radius:5px;">7</button>
-            <button onclick="cAdd('8')" style="background:#1e293b; color:white; padding:10px; border-radius:5px;">8</button>
-            <button onclick="cAdd('9')" style="background:#1e293b; color:white; padding:10px; border-radius:5px;">9</button>
-            <button onclick="cAdd('*')" style="background:var(--accent); padding:10px; border-radius:5px;">×</button>
-            <button onclick="cEq()" style="grid-column:span 4; background:green; color:white; padding:10px; border-radius:5px;">=</button>
-        </div>
+    <div class="section-header">🛠️ Utility Hub</div>
+    <div class="grid">
+        <div class="card" onclick="show('tool-calc')"><div class="card-info"><h3>🧮 Calculator</h3><p>Full Scientific logic.</p></div></div>
+        <div class="card" onclick="show('tool-todo')"><div class="card-info"><h3>✅ Task Board</h3><p>Organize your day.</p></div></div>
+        <div class="card" onclick="show('tool-clock')"><div class="card-info"><h3>🕐 World Clock</h3><p>Global time zones.</p></div></div>
+        <div class="card" onclick="show('tool-timer')"><div class="card-info"><h3>⏱️ Pro Timer</h3><p>Precision countdown.</p></div></div>
+        <div class="card" onclick="show('tool-pw')"><div class="card-info"><h3>🔐 KeyGen</h3><p>Secure passwords.</p></div></div>
     </div>
 </div>
 
-<div id="support" class="page">
-  <div class="tool-box">
-    <h2>🎫 Submit Request</h2>
-    <input id="tk-title" placeholder="Game Name">
-    <input id="tk-url" placeholder="URL">
-    <button class="btn-action" onclick="sendTicket()">SUBMIT TICKET</button>
-  </div>
+<!-- TOOL PAGES -->
+<div id="tool-calc" class="page"><div class="tool-container">
+    <h2>Calculator</h2>
+    <div id="calcDisplay" class="calc-display">0</div>
+    <div class="calc-grid">
+        <button class="calc-btn" onclick="cClear()" style="grid-column:span 2; background:#ef4444">AC</button>
+        <button class="calc-btn" onclick="cDel()">DEL</button>
+        <button class="calc-btn" onclick="cAdd('/')" style="background:var(--accent); color:black">÷</button>
+        <button class="calc-btn" onclick="cAdd('7')">7</button><button class="calc-btn" onclick="cAdd('8')">8</button><button class="calc-btn" onclick="cAdd('9')">9</button>
+        <button class="calc-btn" onclick="cAdd('*')" style="background:var(--accent); color:black">×</button>
+        <button class="calc-btn" onclick="cAdd('4')">4</button><button class="calc-btn" onclick="cAdd('5')">5</button><button class="calc-btn" onclick="cAdd('6')">6</button>
+        <button class="calc-btn" onclick="cAdd('-')" style="background:var(--accent); color:black">-</button>
+        <button class="calc-btn" onclick="cAdd('1')">1</button><button class="calc-btn" onclick="cAdd('2')">2</button><button class="calc-btn" onclick="cAdd('3')">3</button>
+        <button class="calc-btn" onclick="cAdd('+')" style="background:var(--accent); color:black">+</button>
+        <button class="calc-btn" onclick="cAdd('0')" style="grid-column:span 2">0</button><button class="calc-btn" onclick="cAdd('.')">.</button>
+        <button class="calc-btn" onclick="cEq()" style="background:#10b981">=</button>
+    </div>
+    <button class="btn-accent" onclick="show('tools')" style="background:none; border:1px solid var(--accent); color:var(--accent)">← Back</button>
+</div></div>
+
+<div id="tool-todo" class="page"><div class="tool-container">
+    <h2>Task Board</h2>
+    <div style="display:flex; gap:10px; margin: 20px 0;">
+        <input type="text" id="todoIn" class="input-field" placeholder="Enter task..." style="margin:0">
+        <button class="btn-accent" onclick="todoAdd()" style="width: 100px; margin:0">ADD</button>
+    </div>
+    <div id="todoList" style="max-height: 400px; overflow-y: auto;"></div>
+    <button class="btn-accent" onclick="show('tools')" style="background:none; border:none; color:var(--text-dim)">← Back</button>
+</div></div>
+
+<div id="tool-clock" class="page"><div class="tool-container">
+    <h2>World Clock</h2>
+    <div id="mainClock" style="font-size: 4rem; color: var(--accent); font-family: monospace; margin: 20px 0;">00:00:00</div>
+    <div id="dateText" style="font-size: 1.2rem; color: var(--text-dim); margin-bottom: 30px;">Loading Date...</div>
+    <div style="text-align: left; background: rgba(0,0,0,0.2); padding: 20px; border-radius: 15px;">
+        <p>🌏 London: <span id="lonTime">--</span></p>
+        <p>🗽 New York: <span id="nyTime">--</span></p>
+        <p>🗼 Tokyo: <span id="tokTime">--</span></p>
+    </div>
+    <button class="btn-accent" onclick="show('tools')" style="margin-top: 30px;">← Back</button>
+</div></div>
+
+<div id="tool-timer" class="page"><div class="tool-container">
+    <h2>Pro Timer</h2>
+    <div id="timerDisp" style="font-size: 5rem; color: #10b981; font-family: monospace; margin: 20px 0;">00:00</div>
+    <div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 20px;">
+        <input type="number" id="tMin" class="input-field" placeholder="Min" style="width: 100px; text-align: center;">
+        <input type="number" id="tSec" class="input-field" placeholder="Sec" style="width: 100px; text-align: center;">
+    </div>
+    <button class="btn-accent" id="tmrBtn" onclick="tmrToggle()">START TIMER</button>
+    <button class="btn-accent" onclick="tmrReset()" style="background:none; color: #ef4444;">RESET</button>
+    <button class="btn-accent" onclick="show('tools')" style="background:none; border:none; color:var(--text-dim)">← Back</button>
+</div></div>
+
+<div id="tool-pw" class="page"><div class="tool-container">
+    <h2>KeyGen</h2>
+    <div id="pwOut" style="background: #000; padding: 25px; border-radius: 15px; font-family: monospace; font-size: 1.5rem; margin: 20px 0; border: 1px solid var(--accent); color: var(--accent); word-break: break-all;">P@ssword123</div>
+    <button class="btn-accent" onclick="genPw()">GENERATE SECURE KEY</button>
+    <button class="btn-accent" onclick="show('tools')" style="margin-top: 20px; background:none; border:none; color:var(--text-dim)">← Back</button>
+</div></div>
+
+<!-- 🎫 SUPPORT & SETTINGS -->
+<div id="support" class="page"><div class="container">
+    <h2>🎫 Submit a Request</h2>
+    <div class="tool-container" style="max-width: 600px;">
+        <input type="text" id="tkName" class="input-field" placeholder="Game Name">
+        <textarea id="tkMsg" class="input-field" rows="4" placeholder="Description or URL..."></textarea>
+        <button class="btn-accent" onclick="sendTicket()">SUBMIT TICKET</button>
+    </div>
+</div></div>
+
+<div id="settings" class="page"><div class="container">
+    <h2>🎨 Personalize Theme</h2>
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; margin-top: 30px;">
+        <div class="card" onclick="setTheme('cyberpunk')" style="padding: 20px; background: #000; border-color: #00f2ff; color: #00f2ff;">CYBERPUNK</div>
+        <div class="card" onclick="setTheme('midnight')" style="padding: 20px; background: #0f172a; border-color: #38bdf8; color: #38bdf8;">MIDNIGHT</div>
+        <div class="card" onclick="setTheme('emerald')" style="padding: 20px; background: #064e3b; border-color: #34d399; color: #34d399;">EMERALD</div>
+        <div class="card" onclick="setTheme('sunset')" style="padding: 20px; background: #451a03; border-color: #fbbf24; color: #fbbf24;">SUNSET</div>
+    </div>
+</div></div>
+
+<!-- ⚙️ ADMIN -->
+<div id="admin" class="page"><div class="container">
+    <h2>Master Dashboard</h2>
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 30px;">
+        <div class="tool-container" style="margin:0; text-align:left;">
+            <h3>➕ Add Game</h3>
+            <input id="ad-name" class="input-field" placeholder="Name">
+            <input id="ad-url" class="input-field" placeholder="URL">
+            <input id="ad-img" class="input-field" placeholder="Image URL">
+            <button class="btn-accent" onclick="adAdd()">ADD TO LIBRARY</button>
+        </div>
+        <div class="tool-container" style="margin:0; text-align:left;">
+            <h3>🎫 Tickets</h3>
+            <div id="ad-tickets" style="font-size: 0.8rem;"></div>
+        </div>
+    </div>
+    <button onclick="localStorage.clear(); location.reload();" style="margin-top: 50px; color:red; border:none; background:none; cursor:pointer;">Reset Site Database</button>
+</div></div>
+
+<!-- 🌓 ADMIN MODAL -->
+<div id="adminModal" class="modal">
+    <div class="modal-content">
+        <h3>Master Authentication</h3>
+        <input type="password" id="adminPwd" class="input-field" placeholder="Enter password...">
+        <button class="btn-accent" onclick="authAdmin()">UNLOCK HUB</button>
+        <button onclick="document.getElementById('adminModal').style.display='none'" style="background:none; border:none; margin-top:15px; color:var(--text-dim); cursor:pointer;">Cancel</button>
+    </div>
 </div>
 
-<div id="settings" class="page">
-  <div class="tool-box">
-    <h2>🎨 Themes</h2>
-    <button class="btn-action" onclick="setTheme('cyberpunk')">CYBERPUNK</button>
-    <button class="btn-action" onclick="setTheme('midnight')">MIDNIGHT</button>
-    <button class="btn-action" onclick="setTheme('emerald')">EMERALD</button>
-    <button class="btn-action" onclick="setTheme('sunset')">SUNSET</button>
-  </div>
-</div>
-
-<!-- ADMIN -->
-<div id="admin" class="page">
-  <div class="tool-box">
-    <h2>⚙️ Admin Control</h2>
-    <div id="adminTickets"></div>
-    <button onclick="localStorage.clear(); location.reload();" style="color:red; margin-top:20px; background:none; border:none; cursor:pointer;">Reset All Site Data</button>
-  </div>
-</div>
-
-<div id="adminLogin" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:2000; align-items:center; justify-content:center;">
-  <div class="tool-box" style="text-align:center">
-    <h3>Admin Password</h3>
-    <input type="password" id="adminPwdInput">
-    <button class="btn-action" onclick="processAdminLogin()">LOGIN</button>
-    <button onclick="document.getElementById('adminLogin').style.display='none'" style="margin-top:10px; color:var(--text-dim); background:none; border:none;">Cancel</button>
-  </div>
-</div>
-
-<footer>&copy; 2026 MEGA HUB • 50+ GAMES INSTALLED</footer>
+<footer>
+    <p>&copy; 2026 UNBLOCKED.IO HUB • ALL-IN-ONE MASTER FILE • VERSION 5.0</p>
+</footer>
 
 <script>
-const ACCESS_KEY = "UnblockedGames.io!";
-
-// MEGA DATABASE (50+ GAMES)
+// 💾 MASTER DATA (50+ Games)
 const STARTER_GAMES = [
-    { id: 1, name: "Run 3", url: "https://lekugames.github.io/run-3/", img: "https://www.coolmathgames.com/sites/default/files/run-3.jpg" },
-    { id: 2, name: "Moto X3M", url: "https://moto-x3m.github.io/", img: "https://www.coolmathgames.com/sites/default/files/moto-x3m.jpg" },
-    { id: 3, name: "Minecraft", url: "https://classic.minecraft.net/", img: "https://images.unsplash.com/photo-1627389955609-bc013da0bc5a?auto=format&fit=crop&q=80&w=400" },
-    { id: 4, name: "1v1.lol", url: "https://1v1.lol/", img: "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=400" },
-    { id: 5, name: "Retro Bowl", url: "https://game312.github.io/retro-bowl/", img: "https://www.coolmathgames.com/sites/default/files/retro-bowl.png" },
-    { id: 6, name: "Slope", url: "https://krunker.io/", img: "https://www.coolmathgames.com/sites/default/files/slope.png" },
+    { id: 1, name: "Minecraft", url: "https://classic.minecraft.net/", img: "https://images.unsplash.com/photo-1627389955609-bc013da0bc5a?w=400" },
+    { id: 2, name: "1v1.lol", url: "https://1v1.lol/", img: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=400" },
+    { id: 3, name: "Run 3", url: "https://lekugames.github.io/run-3/", img: "https://www.coolmathgames.com/sites/default/files/run-3.jpg" },
+    { id: 4, name: "Moto X3M", url: "https://moto-x3m.github.io/", img: "https://www.coolmathgames.com/sites/default/files/moto-x3m.jpg" },
+    { id: 5, name: "Slope", url: "https://slope-game.github.io/", img: "https://www.coolmathgames.com/sites/default/files/slope.png" },
+    { id: 6, name: "Retro Bowl", url: "https://game312.github.io/retro-bowl/", img: "https://www.coolmathgames.com/sites/default/files/retro-bowl.png" },
     { id: 7, name: "Fireboy & Watergirl", url: "https://fireboy-watergirl.github.io/", img: "https://www.mathplayground.com/images/fireboy_watergirl_forest_temple.png" },
     { id: 8, name: "Duck Life 4", url: "https://ducklife4.com/", img: "https://www.mathplayground.com/images/duck_life_4.png" },
-    { id: 9, name: "2048", url: "https://play2048.co/", img: "https://www.coolmathgames.com/sites/default/files/2048.png" },
-    { id: 10, name: "Cookie Clicker", url: "https://orteil.dashnet.org/cookieclicker/", img: "https://www.coolmathgames.com/sites/default/files/cookie-clicker.png" },
-    { id: 11, name: "Tetris", url: "https://tetris.com/play-tetris", img: "https://images.unsplash.com/photo-1585338663991-4bc632599484?auto=format&fit=crop&q=80&w=400" },
-    { id: 12, name: "Pac-Man", url: "https://www.google.com/logos/2010/pacman10-i.html", img: "https://images.unsplash.com/photo-1579306194872-64d3b7bac4c2?auto=format&fit=crop&q=80&w=400" },
-    { id: 13, name: "Subway Surfers", url: "https://subway-surfers.github.io/", img: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=400" },
-    { id: 14, name: "Geometry Dash", url: "https://geometrydash.io/", img: "https://images.unsplash.com/photo-1614850523296-d8c1af93d400?auto=format&fit=crop&q=80&w=400" },
-    { id: 15, name: "Temple Run 2", url: "https://temple-run-2.github.io/", img: "https://images.unsplash.com/photo-1605898393849-aa9849aea24c?auto=format&fit=crop&q=80&w=400" },
-    { id: 16, name: "Paper.io 2", url: "https://paper-io.com/", img: "https://images.unsplash.com/photo-1614850523459-c2f4c699c52e?auto=format&fit=crop&q=80&w=400" },
-    { id: 17, name: "Bitlife", url: "https://bitlifeonline.com/", img: "https://images.unsplash.com/photo-1605898393849-aa9849aea24c?auto=format&fit=crop&q=80&w=400" },
-    { id: 18, name: "Snake", url: "https://www.google.com/search?q=play+snake", img: "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=400" },
-    { id: 19, name: "Doodle Jump", url: "https://doodlejump.io/", img: "https://images.unsplash.com/photo-1605898393849-aa9849aea24c?auto=format&fit=crop&q=80&w=400" },
-    { id: 20, name: "Happy Wheels", url: "https://totaljerkface.com/happy_wheels.tjf", img: "https://images.unsplash.com/photo-1605898393849-aa9849aea24c?auto=format&fit=crop&q=80&w=400" },
-    // More added to reach 50+ logic in background
-    { id: 21, name: "Run 2", url: "https://lekugames.github.io/run-2/", img: "https://via.placeholder.com/400x160?text=Run+2" },
-    { id: 22, name: "Moto X3M Pool Party", url: "https://moto-x3m.github.io/pool-party/", img: "https://via.placeholder.com/400x160?text=Moto+Pool" },
-    { id: 23, name: "Moto X3M Spooky Land", url: "https://moto-x3m.github.io/spooky-land/", img: "https://via.placeholder.com/400x160?text=Moto+Spooky" },
-    { id: 24, name: "Moto X3M Winter", url: "https://moto-x3m.github.io/winter/", img: "https://via.placeholder.com/400x160?text=Moto+Winter" },
-    { id: 25, name: "Duck Life 1", url: "https://ducklife1.com/", img: "https://via.placeholder.com/400x160?text=Duck+1" },
-    { id: 26, name: "Duck Life 2", url: "https://ducklife2.com/", img: "https://via.placeholder.com/400x160?text=Duck+2" },
-    { id: 27, name: "Duck Life 3", url: "https://ducklife3.com/", img: "https://via.placeholder.com/400x160?text=Duck+3" },
-    { id: 28, name: "Sugar Sugar", url: "https://sugar-sugar.github.io/", img: "https://via.placeholder.com/400x160?text=Sugar" },
-    { id: 29, name: "Papa's Pizzeria", url: "https://papas-pizzeria.github.io/", img: "https://via.placeholder.com/400x160?text=Papa" },
-    { id: 30, name: "Basketball Stars", url: "https://basketball-stars.github.io/", img: "https://via.placeholder.com/400x160?text=Basketball" },
-    { id: 31, name: "Football Legends", url: "https://football-legends.github.io/", img: "https://via.placeholder.com/400x160?text=Football" },
-    { id: 32, name: "Soccer Skills", url: "https://soccer-skills.github.io/", img: "https://via.placeholder.com/400x160?text=Soccer" },
-    { id: 33, name: "Crossy Road", url: "https://crossy-road.github.io/", img: "https://via.placeholder.com/400x160?text=Crossy" },
-    { id: 34, name: "Among Us Online", url: "https://among-us-online.github.io/", img: "https://via.placeholder.com/400x160?text=AmongUs" },
-    { id: 35, name: "Krunker.io", url: "https://krunker.io/", img: "https://via.placeholder.com/400x160?text=Krunker" },
-    { id: 36, name: "Zombs Royale", url: "https://zombsroyale.io/", img: "https://via.placeholder.com/400x160?text=Zombs" },
-    { id: 37, name: "Shell Shockers", url: "https://shellshock.io/", img: "https://via.placeholder.com/400x160?text=Shell" },
-    { id: 38, name: "Slither.io", url: "http://slither.io/", img: "https://via.placeholder.com/400x160?text=Slither" },
-    { id: 39, name: "Agar.io", url: "https://agar.io/", img: "https://via.placeholder.com/400x160?text=Agar" },
-    { id: 40, name: "Diep.io", url: "https://diep.io/", img: "https://via.placeholder.com/400x160?text=Diep" },
-    { id: 41, name: "Friday Night Funkin", url: "https://ninja-muffin24.itch.io/funkin", img: "https://via.placeholder.com/400x160?text=FNF" },
-    { id: 42, name: "Super Mario 64", url: "https://sm64.com/", img: "https://via.placeholder.com/400x160?text=Mario64" },
-    { id: 43, name: "Sonic the Hedgehog", url: "https://sonic-online.com/", img: "https://via.placeholder.com/400x160?text=Sonic" },
-    { id: 44, name: "Pokemon Emerald", url: "https://pokemon-emerald-online.com/", img: "https://via.placeholder.com/400x160?text=Pokemon" },
-    { id: 45, name: "Street Fighter 2", url: "https://street-fighter-2.com/", img: "https://via.placeholder.com/400x160?text=StreetFighter" },
-    { id: 46, name: "Doom", url: "https://doom-online.com/", img: "https://via.placeholder.com/400x160?text=Doom" },
-    { id: 47, name: "Quake", url: "https://quake-online.com/", img: "https://via.placeholder.com/400x160?text=Quake" },
-    { id: 48, name: "Minecraft 1.8", url: "https://mc-1.8.com/", img: "https://via.placeholder.com/400x160?text=MC1.8" },
-    { id: 49, name: "Bloons TD 4", url: "https://bloons-td-4.com/", img: "https://via.placeholder.com/400x160?text=BTD4" },
-    { id: 50, name: "Bloons TD 5", url: "https://bloons-td-5.com/", img: "https://via.placeholder.com/400x160?text=BTD5" },
-    { id: 51, name: "World's Hardest Game", url: "https://worlds-hardest-game.github.io/", img: "https://via.placeholder.com/400x160?text=HardestGame" }
+    { id: 9, name: "Subway Surfers", url: "https://subway-surfers.github.io/", img: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400" },
+    { id: 10, name: "Geometry Dash", url: "https://geometrydash.io/", img: "https://images.unsplash.com/photo-1614850523296-d8c1af93d400?w=400" },
+    { id: 11, name: "Tetris", url: "https://tetris.com/play-tetris", img: "https://images.unsplash.com/photo-1585338663991-4bc632599484?w=400" },
+    { id: 12, name: "Pac-Man", url: "https://www.google.com/logos/2010/pacman10-i.html", img: "https://images.unsplash.com/photo-1579306194872-64d3b7bac4c2?w=400" },
+    { id: 13, name: "Cookie Clicker", url: "https://orteil.dashnet.org/cookieclicker/", img: "https://www.coolmathgames.com/sites/default/files/cookie-clicker.png" },
+    { id: 14, name: "2048", url: "https://play2048.co/", img: "https://www.coolmathgames.com/sites/default/files/2048.png" },
+    { id: 15, name: "Snake", url: "https://www.google.com/search?q=play+snake", img: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=400" },
+    { id: 16, name: "Crossy Road", url: "https://crossy-road.github.io/", img: "https://via.placeholder.com/400x160?text=Crossy" },
+    { id: 17, name: "Among Us Online", url: "https://among-us-online.github.io/", img: "https://via.placeholder.com/400x160?text=AmongUs" },
+    { id: 18, name: "Krunker", url: "https://krunker.io/", img: "https://via.placeholder.com/400x160?text=Krunker" },
+    { id: 19, name: "Shell Shockers", url: "https://shellshock.io/", img: "https://via.placeholder.com/400x160?text=Shell" },
+    { id: 20, name: "Paper.io 2", url: "https://paper-io.com/", img: "https://via.placeholder.com/400x160?text=Paper" },
+    { id: 21, name: "Doodle Jump", url: "https://doodlejump.io/", img: "https://via.placeholder.com/400x160?text=Doodle" },
+    { id: 22, name: "Temple Run 2", url: "https://temple-run-2.github.io/", img: "https://via.placeholder.com/400x160?text=TempleRun" },
+    { id: 23, name: "Basketball Stars", url: "https://basketball-stars.github.io/", img: "https://via.placeholder.com/400x160?text=Basketball" },
+    { id: 24, name: "World's Hardest Game", url: "https://worlds-hardest-game.github.io/", img: "https://via.placeholder.com/400x160?text=Hardest" },
+    { id: 25, name: "Friday Night Funkin", url: "https://funkin.me/", img: "https://via.placeholder.com/400x160?text=FNF" },
+    { id: 26, name: "Moto X3M Pool", url: "https://moto-x3m.github.io/pool-party/", img: "https://via.placeholder.com/400x160?text=MotoPool" },
+    { id: 27, name: "Moto X3M Winter", url: "https://moto-x3m.github.io/winter/", img: "https://via.placeholder.com/400x160?text=MotoWinter" },
+    { id: 28, name: "Duck Life 1", url: "https://ducklife1.com/", img: "https://via.placeholder.com/400x160?text=Duck1" },
+    { id: 29, name: "Duck Life 2", url: "https://ducklife2.com/", img: "https://via.placeholder.com/400x160?text=Duck2" },
+    { id: 30, name: "Duck Life 3", url: "https://ducklife3.com/", img: "https://via.placeholder.com/400x160?text=Duck3" },
+    { id: 31, name: "Sugar Sugar", url: "https://sugar-sugar.github.io/", img: "https://via.placeholder.com/400x160?text=Sugar" },
+    { id: 32, name: "Super Mario 64", url: "https://sm64.com/", img: "https://via.placeholder.com/400x160?text=Mario64" },
+    { id: 33, name: "Sonic Online", url: "https://sonic-online.com/", img: "https://via.placeholder.com/400x160?text=Sonic" },
+    { id: 34, name: "Pokemon Emerald", url: "https://pokemon-emerald-online.com/", img: "https://via.placeholder.com/400x160?text=Pokemon" },
+    { id: 35, name: "Bloons TD 5", url: "https://bloons-td-5.com/", img: "https://via.placeholder.com/400x160?text=BTD5" },
+    { id: 36, name: "Doom", url: "https://doom-online.com/", img: "https://via.placeholder.com/400x160?text=Doom" },
+    { id: 37, name: "Street Fighter 2", url: "https://street-fighter-2.com/", img: "https://via.placeholder.com/400x160?text=StreetFighter" },
+    { id: 38, name: "Cut the Rope", url: "https://cuttherope.net/", img: "https://via.placeholder.com/400x160?text=CutTheRope" },
+    { id: 39, name: "Bitlife", url: "https://bitlifeonline.com/", img: "https://via.placeholder.com/400x160?text=Bitlife" },
+    { id: 40, name: "Zombs Royale", url: "https://zombsroyale.io/", img: "https://via.placeholder.com/400x160?text=Zombs" },
+    { id: 41, name: "Agar.io", url: "https://agar.io/", img: "https://via.placeholder.com/400x160?text=Agar" },
+    { id: 42, name: "Diep.io", url: "https://diep.io/", img: "https://via.placeholder.com/400x160?text=Diep" },
+    { id: 43, name: "Slither.io", url: "http://slither.io/", img: "https://via.placeholder.com/400x160?text=Slither" },
+    { id: 44, name: "Football Legends", url: "https://football-legends.github.io/", img: "https://via.placeholder.com/400x160?text=Football" },
+    { id: 45, name: "Soccer Skills", url: "https://soccer-skills.github.io/", img: "https://via.placeholder.com/400x160?text=Soccer" },
+    { id: 46, name: "Papa's Burgeria", url: "https://papas-burgeria.github.io/", img: "https://via.placeholder.com/400x160?text=Papas" },
+    { id: 47, name: "Run 1", url: "https://lekugames.github.io/run-1/", img: "https://via.placeholder.com/400x160?text=Run1" },
+    { id: 48, name: "Run 2", url: "https://lekugames.github.io/run-2/", img: "https://via.placeholder.com/400x160?text=Run2" },
+    { id: 49, name: "Moto Spooky", url: "https://moto-x3m.github.io/spooky-land/", img: "https://via.placeholder.com/400x160?text=MotoSpooky" },
+    { id: 50, name: "Happy Wheels", url: "https://totaljerkface.com/", img: "https://via.placeholder.com/400x160?text=HappyWheels" }
 ];
 
 let hubGames = JSON.parse(localStorage.getItem('hub_games')) || STARTER_GAMES;
+let hubFavs = JSON.parse(localStorage.getItem('hub_favs')) || [];
 let hubTickets = JSON.parse(localStorage.getItem('hub_tickets')) || [];
-let currentTheme = localStorage.getItem('hub_theme') || 'midnight';
+let hubTodos = JSON.parse(localStorage.getItem('hub_todos')) || [];
+let activeTheme = localStorage.getItem('hub_theme') || 'midnight';
 
-document.body.setAttribute('data-theme', currentTheme);
-
+// 🧭 NAVIGATION
 function show(id) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-    document.getElementById('curPath').innerText = id.charAt(0).toUpperCase() + id.slice(1);
+    const p = document.getElementById(id);
+    if(p) p.classList.add('active');
+    document.getElementById('curPath').innerText = id.replace('tool-', 'Tools / ').charAt(0).toUpperCase() + id.replace('tool-', 'Tools / ').slice(1);
     window.scrollTo(0,0);
     if(id === 'home' || id === 'games') renderHub();
-    if(id === 'tools') renderTools();
+    if(id === 'tool-todo') renderTodos();
     if(id === 'admin') renderAdmin();
 }
 
 function renderHub() {
     const cardMaker = (g) => `
-        <div class="card" onclick="window.open('${g.url}', '_blank')">
-            <img src="${g.img || 'https://via.placeholder.com/400x160?text='+g.name}" class="card-img" onerror="this.src='https://via.placeholder.com/400x160?text=${g.name}'">
-            <div class="card-info"><div class="card-title">${g.name}</div></div>
+        <div class="card">
+            <button class="fav-icon" onclick="toggleFav(${g.id})">${hubFavs.find(f=>f.id===g.id)?'★':'☆'}</button>
+            <img src="${g.img}" class="card-img" onclick="window.open('${g.url}','_blank')">
+            <div class="card-info" onclick="window.open('${g.url}','_blank')">
+                <div class="card-title">${g.name}</div>
+                <button class="btn-accent" style="margin:0; padding:8px;">PLAY</button>
+            </div>
         </div>
     `;
-    const t = document.getElementById('trendingGrid');
-    const f = document.getElementById('fullGamesGrid');
-    if(t) t.innerHTML = hubGames.slice(0, 4).map(cardMaker).join('');
-    if(f) f.innerHTML = hubGames.map(cardMaker).join('');
+    const trend = document.getElementById('trendingGrid');
+    const full = document.getElementById('allGamesGrid');
+    const fav = document.getElementById('favsGrid');
+    if(trend) trend.innerHTML = hubGames.slice(0, 4).map(cardMaker).join('');
+    if(full) full.innerHTML = hubGames.map(cardMaker).join('');
+    if(fav) fav.innerHTML = hubFavs.length ? hubFavs.map(cardMaker).join('') : "<p style='color:var(--text-dim);grid-column:1/-1;text-align:center;'>No favorites yet.</p>";
 }
 
-function renderTools() {
-    const tools = [
-        { id: 'tool-calculator', name: '🧮 Calculator' },
-        { id: 'tool-todo', name: '✅ Task List' }
-    ];
-    document.getElementById('toolsGrid').innerHTML = tools.map(t => `<div class="card" onclick="show('${t.id}')"><div class="card-info"><div class="card-title">${t.name}</div></div></div>`).join('');
+function toggleFav(id) {
+    const g = hubGames.find(x => x.id === id);
+    const idx = hubFavs.findIndex(f => f.id === id);
+    if(idx === -1) hubFavs.push(g); else hubFavs.splice(idx, 1);
+    localStorage.setItem('hub_favs', JSON.stringify(hubFavs));
+    renderHub();
 }
 
-/* CALC LOGIC */
+// 🧮 CALCULATOR
 let cVal = "0";
 function cAdd(v) { if(cVal==="0") cVal=v; else cVal+=v; document.getElementById('calcDisplay').innerText = cVal; }
-function cClear() { cVal="0"; document.getElementById('calcDisplay').innerText = cVal; }
+function cClear() { cVal="0"; document.getElementById('calcDisplay').innerText = "0"; }
 function cDel() { cVal = cVal.length > 1 ? cVal.slice(0,-1) : "0"; document.getElementById('calcDisplay').innerText = cVal; }
 function cEq() { try { cVal = eval(cVal).toString(); } catch { cVal="Error"; } document.getElementById('calcDisplay').innerText = cVal; }
 
-/* SUPPORT */
+// ✅ TODO
+function renderTodos() {
+    document.getElementById('todoList').innerHTML = hubTodos.map((t, i) => `
+        <div class="todo-item"><span>${t.text}</span><button onclick="delTodo(${i})" style="background:none;border:none;color:red;cursor:pointer;">X</button></div>
+    `).join('');
+}
+function todoAdd() {
+    const i = document.getElementById('todoIn'); if(!i.value) return;
+    hubTodos.push({text: i.value}); i.value = "";
+    localStorage.setItem('hub_todos', JSON.stringify(hubTodos)); renderTodos();
+}
+function delTodo(i) { hubTodos.splice(i,1); localStorage.setItem('hub_todos', JSON.stringify(hubTodos)); renderTodos(); }
+
+// 🕐 CLOCK & TIMER
+setInterval(() => {
+    const n = new Date();
+    if(document.getElementById('mainClock')) document.getElementById('mainClock').innerText = n.toLocaleTimeString();
+    if(document.getElementById('dateText')) document.getElementById('dateText').innerText = n.toDateString();
+    if(document.getElementById('tokTime')) document.getElementById('tokTime').innerText = n.toLocaleTimeString('en-US', {timeZone: 'Asia/Tokyo'});
+    if(document.getElementById('nyTime')) document.getElementById('nyTime').innerText = n.toLocaleTimeString('en-US', {timeZone: 'America/New_York'});
+    if(document.getElementById('lonTime')) document.getElementById('lonTime').innerText = n.toLocaleTimeString('en-GB', {timeZone: 'Europe/London'});
+}, 1000);
+
+let tRem, tInt = null;
+function tmrToggle() {
+    const btn = document.getElementById('tmrBtn');
+    if(tInt) { clearInterval(tInt); tInt = null; btn.innerText = "START"; }
+    else {
+        if(!tRem) tRem = (+document.getElementById('tMin').value * 60) + (+document.getElementById('tSec').value);
+        tInt = setInterval(() => {
+            if(tRem <= 0) { clearInterval(tInt); tInt = null; alert("Timer Finished!"); return; }
+            tRem--; const m = Math.floor(tRem/60), s = tRem%60;
+            document.getElementById('timerDisp').innerText = `${m}:${s.toString().padStart(2,'0')}`;
+        }, 1000);
+        btn.innerText = "PAUSE";
+    }
+}
+function tmrReset() { clearInterval(tInt); tInt = null; tRem = 0; document.getElementById('timerDisp').innerText = "00:00"; document.getElementById('tmrBtn').innerText = "START"; }
+
+// 🔐 PW & SUPPORT
+function genPw() {
+    const c = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789!@#$%^&*";
+    let p = ""; for(let i=0; i<16; i++) p += c.charAt(Math.floor(Math.random()*c.length));
+    document.getElementById('pwOut').innerText = p;
+}
 function sendTicket() {
-    const t = document.getElementById('tk-title').value;
-    const u = document.getElementById('tk-url').value;
-    if(!t) return;
-    hubTickets.push({t, u, id: Date.now()});
+    hubTickets.push({n: document.getElementById('tkName').value, m: document.getElementById('tkMsg').value, d: new Date().toLocaleDateString()});
     localStorage.setItem('hub_tickets', JSON.stringify(hubTickets));
-    alert("Sent!");
+    toast("Request submitted to Admin.");
 }
 
-/* THEMES */
-function setTheme(t) { document.body.setAttribute('data-theme', t); localStorage.setItem('hub_theme', t); }
-
-/* ADMIN */
-function openAdminModal() { document.getElementById('adminLogin').style.display = 'flex'; }
-function processAdminLogin() { if(document.getElementById('adminPwdInput').value === ACCESS_KEY) { document.getElementById('adminLogin').style.display='none'; show('admin'); } else alert("Wrong!"); }
+// ⚙️ ADMIN
+function openAdminModal() { document.getElementById('adminModal').style.display='flex'; }
+function authAdmin() {
+    if(document.getElementById('adminPwd').value === ACCESS_KEY) {
+        document.getElementById('adminModal').style.display='none'; show('admin');
+    } else alert("Invalid Password");
+}
 function renderAdmin() {
-    document.getElementById('adminTickets').innerHTML = hubTickets.map(t => `<div style="background:rgba(255,255,255,0.05); padding:10px; margin-bottom:5px; border-radius:10px;">${t.t} - <small>${t.u}</small></div>`).join('');
+    document.getElementById('ad-tickets').innerHTML = hubTickets.map(t => `<div class="todo-item"><b>${t.n}:</b> ${t.m}</div>`).join('');
+}
+function adAdd() {
+    hubGames.push({id: Date.now(), name: document.getElementById('ad-name').value, url: document.getElementById('ad-url').value, img: document.getElementById('ad-img').value});
+    localStorage.setItem('hub_games', JSON.stringify(hubGames));
+    toast("Game added to library."); show('games');
 }
 
-renderHub();
+function setTheme(t) { document.documentElement.setAttribute('data-theme', t); localStorage.setItem('hub_theme', t); }
+function toast(m) { const t = document.getElementById('toast'); t.innerText = m; t.style.display='block'; setTimeout(()=>t.style.display='none', 3000); }
+
+document.documentElement.setAttribute('data-theme', activeTheme);
+show('home');
 </script>
 </body>
 </html>
