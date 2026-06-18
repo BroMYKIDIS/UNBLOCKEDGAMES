@@ -1,252 +1,272 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" data-theme="midnight">
 <head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Unblocked.io - Hub</title>
+<title>Unblocked.io - Ultimate Hub</title>
 <style>
+:root {
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 🎨 THEME ENGINE */
+[data-theme="cyberpunk"] { --bg: #050505; --nav: #0d0d0d; --card: #151515; --accent: #00f2ff; --text: #ffffff; --text-dim: #888; --shadow: 0 0 15px rgba(0, 242, 255, 0.3); }
+[data-theme="midnight"] { --bg: #0f172a; --nav: #1e293b; --card: #334155; --accent: #38bdf8; --text: #f8fafc; --text-dim: #94a3b8; --shadow: 0 10px 15px rgba(0,0,0,0.3); }
+[data-theme="emerald"] { --bg: #064e3b; --nav: #065f46; --card: #059669; --accent: #34d399; --text: #ecfdf5; --text-dim: #a7f3d0; --shadow: 0 0 15px rgba(52, 211, 153, 0.3); }
+[data-theme="sunset"] { --bg: #451a03; --nav: #78350f; --card: #92400e; --accent: #fbbf24; --text: #fffbeb; --text-dim: #fef3c7; --shadow: 0 0 15px rgba(251, 191, 36, 0.3); }
+
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: Arial, sans-serif; background: #0b1220; color: white; }
+body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--text); transition: background var(--transition), color var(--transition); line-height: 1.6; }
 
-nav {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 15px 30px; background: #0f172a; position: sticky; top: 0; z-index: 100;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+/* NAVIGATION */
+nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 5%; background: var(--nav); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid rgba(255,255,255,0.05); backdrop-filter: blur(10px); }
+.logo { font-size: 1.5rem; font-weight: 800; color: var(--accent); cursor: pointer; letter-spacing: 1px; }
+nav-links { display: flex; gap: 1.5rem; }
+nav a { text-decoration: none; color: var(--text-dim); font-weight: 600; cursor: pointer; transition: 0.2s; font-size: 0.9rem; }
+nav a:hover, nav a.active { color: var(--accent); }
+
+.breadcrumb { background: rgba(0,0,0,0.2); padding: 0.6rem 5%; font-size: 0.8rem; color: var(--text-dim); border-bottom: 1px solid rgba(255,255,255,0.03); }
+.breadcrumb span { color: var(--accent); font-weight: bold; }
+
+/* HERO */
+.hero { padding: 60px 5%; text-align: center; background: linear-gradient(180deg, var(--nav) 0%, var(--bg) 100%); margin-bottom: 2rem; }
+.hero h1 { font-size: 3rem; margin-bottom: 0.5rem; color: var(--text); }
+.hero p { color: var(--text-dim); font-size: 1.1rem; }
+
+/* GRID & CARDS */
+.section-header { padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem; padding: 1rem 5%; }
+
+.game-card { 
+  background: var(--card); border-radius: 16px; overflow: hidden; border: 1px solid rgba(255,255,255,0.05);
+  transition: var(--transition); display: flex; flex-direction: column; cursor: pointer;
 }
+.game-card:hover { transform: translateY(-8px); border-color: var(--accent); box-shadow: var(--shadow); }
+.game-img { width: 100%; height: 160px; background: #000; object-fit: cover; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.game-info { padding: 1.2rem; flex-grow: 1; }
+.game-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.8rem; }
+.btn-play { background: var(--accent); color: #000; border: none; padding: 0.7rem; border-radius: 8px; font-weight: 700; cursor: pointer; width: 100%; transition: 0.2s; }
 
-.logo { color: #38bdf8; font-weight: bold; font-size: 1.5em; text-decoration: none; cursor: pointer; }
-nav-links { display: flex; gap: 25px; }
-nav a { color: white; text-decoration: none; cursor: pointer; transition: color 0.3s; font-size: 1em; }
-nav a:hover { color: #38bdf8; }
-
-.hero { padding: 60px 30px; text-align: center; background: linear-gradient(135deg, #1d4ed8, #06b6d4); }
-.hero h1 { font-size: 3em; margin-bottom: 10px; }
-
-.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; padding: 20px; }
-.card { background: #111827; padding: 15px; border-radius: 10px; transition: 0.2s; border: 1px solid #1e293b; cursor: pointer; }
-.card:hover { transform: scale(1.03); border-color: #38bdf8; }
-
-.section-title { padding: 20px 30px 10px; font-size: 1.5em; font-weight: bold; }
-.tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; padding: 30px; }
-
-.tool-card {
-  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-  padding: 30px; border-radius: 15px; text-align: center; cursor: pointer;
-  border: 2px solid #1e293b; transition: 0.3s;
-}
-.tool-card:hover { border-color: #38bdf8; transform: translateY(-5px); }
-.tool-icon { font-size: 3em; margin-bottom: 15px; }
-.tool-name { font-size: 1.3em; font-weight: bold; color: #38bdf8; margin-bottom: 10px; }
-
-.page { display: none; }
+/* PAGES */
+.page { display: none; min-height: 80vh; animation: fadeIn 0.4s ease; }
 .page.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.container { max-width: 800px; margin: 0 auto; padding: 40px 5%; }
 
-/* TOOL INTERNAL STYLES */
-.tool-container {
-  max-width: 600px; margin: 40px auto; padding: 30px;
-  background: #111827; border-radius: 20px; border: 2px solid #38bdf8;
-}
-.calc-display {
-  width: 100%; height: 60px; background: #0f172a; color: #38bdf8;
-  font-size: 2em; text-align: right; padding: 10px; border-radius: 8px; margin-bottom: 15px;
-}
-.calc-btn { padding: 15px; background: #1e293b; color: white; border: none; border-radius: 8px; cursor: pointer; }
-.calc-btn:hover { background: #334155; }
-.todo-item { display: flex; justify-content: space-between; padding: 10px; background: #0f172a; margin-bottom: 5px; border-radius: 5px; }
+/* SUPPORT & ADMIN FORMS */
+.card-panel { background: var(--nav); padding: 2rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.05); margin-top: 1rem; }
+.form-group { margin-bottom: 1.2rem; text-align: left; }
+.form-group label { display: block; margin-bottom: 0.5rem; font-size: 0.9rem; color: var(--text-dim); }
+input, textarea { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.2); color: white; outline: none; }
+input:focus { border-color: var(--accent); }
 
-footer { background: #0f172a; padding: 30px; text-align: center; color: #94a3b8; margin-top: 50px; }
+/* THEME PICKER */
+.theme-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; margin-top: 1rem; }
+.theme-btn { padding: 1rem; border-radius: 12px; border: 2px solid rgba(255,255,255,0.05); cursor: pointer; text-align: center; font-weight: bold; font-size: 0.8rem; }
 
-/* Modal */
-.modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; align-items: center; justify-content: center; }
-.modal.active { display: flex; }
-.modal-content { background: #1a1a2e; padding: 30px; border-radius: 15px; width: 90%; max-width: 400px; text-align: center; }
-input { width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; border: none; }
+/* NOTIFICATIONS */
+#toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: var(--accent); color: #000; padding: 10px 25px; border-radius: 50px; font-weight: bold; display: none; z-index: 10000; }
+
+/* ADMIN MODAL */
+.modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 2000; align-items: center; justify-content: center; padding: 20px; }
+.modal-content { background: var(--nav); padding: 30px; border-radius: 20px; width: 100%; max-width: 350px; text-align: center; border: 1px solid var(--accent); }
+
+footer { padding: 40px; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); color: var(--text-dim); font-size: 0.8rem; }
 </style>
 </head>
-<body>
+<body data-theme="midnight">
+
+<div id="toast">Success!</div>
 
 <nav>
-  <div class="logo" onclick="show('home')">🎮 Unblocked.io</div>
-  <nav-links>
+  <div class="logo" onclick="show('home')">UNBLOCKED.IO</div>
+  <nav-links id="mainNav">
     <a onclick="show('home')">Home</a>
     <a onclick="show('games')">Games</a>
-    <a onclick="show('tools')">Tools</a>
-    <a onclick="show('blog')">Blog</a>
-    <a onclick="requestAdminAccess()">Admin</a>
+    <a onclick="show('support')">Support</a>
+    <a onclick="show('settings')">Settings</a>
+    <a onclick="openAdminModal()">Admin</a>
   </nav-links>
 </nav>
 
-<!-- MAIN HUB -->
+<div class="breadcrumb">Location: <span id="curPath">Home</span></div>
+
+<!-- HOME PAGE -->
 <div id="home" class="page active">
   <div class="hero">
-    <h1>🎮 Unblocked.io</h1>
-    <p>Everything you need, all in one place.</p>
+    <h1>Level Up Your Web.</h1>
+    <p>Everything you need, in one secure hub.</p>
   </div>
-  <h2 class="section-title">🔥 Featured</h2>
-  <div class="grid" id="featuredGames"></div>
+  <div class="section-header"><h2>🔥 TRENDING</h2></div>
+  <div id="trendingGrid" class="grid"></div>
 </div>
 
-<!-- TOOLS PAGE -->
-<div id="tools" class="page">
-  <div class="section-title">🛠️ Utility Tools</div>
-  <div class="tools-grid">
-    <div class="tool-card" onclick="show('tool-calculator')">
-      <div class="tool-icon">🧮</div>
-      <div class="tool-name">Calculator</div>
-      <div class="tool-desc">Quick math helper</div>
-    </div>
-    <div class="tool-card" onclick="show('tool-clock')">
-      <div class="tool-icon">🕐</div>
-      <div class="tool-name">World Clock</div>
-      <div class="tool-desc">Check global times</div>
-    </div>
-    <div class="tool-card" onclick="show('tool-todo')">
-      <div class="tool-icon">✅</div>
-      <div class="tool-name">To-Do List</div>
-      <div class="tool-desc">Keep track of tasks</div>
-    </div>
-    <div class="tool-card" onclick="show('tool-pw')">
-      <div class="tool-icon">🔐</div>
-      <div class="tool-name">Password Gen</div>
-      <div class="tool-desc">Secure password creator</div>
+<!-- GAMES PAGE -->
+<div id="games" class="page">
+  <div class="section-header"><h2>🕹️ FULL LIBRARY</h2></div>
+  <div id="fullGamesGrid" class="grid"></div>
+</div>
+
+<!-- SUPPORT PAGE -->
+<div id="support" class="page">
+  <div class="container">
+    <h2>🎫 Submit a Request</h2>
+    <p style="color: var(--text-dim);">Found a game we're missing? Let us know!</p>
+    <div class="card-panel">
+      <div class="form-group">
+        <label>Game Title</label>
+        <input type="text" id="tk-title" placeholder="e.g. 2048">
+      </div>
+      <div class="form-group">
+        <label>Game URL</label>
+        <input type="text" id="tk-url" placeholder="https://...">
+      </div>
+      <button class="btn-play" onclick="sendTicket()">SUBMIT TICKET</button>
     </div>
   </div>
 </div>
 
-<!-- CALCULATOR TOOL -->
-<div id="tool-calculator" class="page">
-  <div class="tool-container" style="max-width: 350px;">
-    <h2>Calculator</h2>
-    <div id="calcRes" class="calc-display">0</div>
-    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;">
-      <button class="calc-btn" onclick="cVal='0';cUpd()">C</button>
-      <button class="calc-btn" onclick="cAdd('/')">/</button>
-      <button class="calc-btn" onclick="cAdd('*')">×</button>
-      <button class="calc-btn" onclick="cDel()">←</button>
-      <button class="calc-btn" onclick="cAdd('7')">7</button>
-      <button class="calc-btn" onclick="cAdd('8')">8</button>
-      <button class="calc-btn" onclick="cAdd('9')">9</button>
-      <button class="calc-btn" onclick="cAdd('-')">-</button>
-      <button class="calc-btn" onclick="cAdd('4')">4</button>
-      <button class="calc-btn" onclick="cAdd('5')">5</button>
-      <button class="calc-btn" onclick="cAdd('6')">6</button>
-      <button class="calc-btn" onclick="cAdd('+')">+</button>
-      <button class="calc-btn" onclick="cAdd('1')">1</button>
-      <button class="calc-btn" onclick="cAdd('2')">2</button>
-      <button class="calc-btn" onclick="cAdd('3')">3</button>
-      <button class="calc-btn" onclick="cEq()" style="background:#38bdf8; grid-row: span 2">=</button>
-      <button class="calc-btn" onclick="cAdd('0')" style="grid-column: span 2">0</button>
-      <button class="calc-btn" onclick="cAdd('.')">.</button>
+<!-- SETTINGS PAGE -->
+<div id="settings" class="page">
+  <div class="container">
+    <h2>🎨 Themes</h2>
+    <div class="theme-grid">
+      <div class="theme-btn" style="background:#050505; color:#00f2ff; border-color:#00f2ff;" onclick="changeTheme('cyberpunk')">CYBERPUNK</div>
+      <div class="theme-btn" style="background:#0f172a; color:#38bdf8; border-color:#38bdf8;" onclick="changeTheme('midnight')">MIDNIGHT</div>
+      <div class="theme-btn" style="background:#064e3b; color:#34d399; border-color:#34d399;" onclick="changeTheme('emerald')">EMERALD</div>
+      <div class="theme-btn" style="background:#451a03; color:#fbbf24; border-color:#fbbf24;" onclick="changeTheme('sunset')">SUNSET</div>
     </div>
-    <button onclick="show('tools')" style="margin-top:20px; width:100%; padding:10px; background:none; color:#38bdf8; border:1px solid #38bdf8; border-radius:8px; cursor:pointer;">Back to Tools</button>
   </div>
 </div>
 
-<!-- OTHER PAGES... (Simplified for brevity but fully functional) -->
-<div id="tool-todo" class="page">
-  <div class="tool-container">
-    <h2>To-Do List</h2>
-    <div style="display:flex; gap:10px; margin:20px 0;">
-      <input type="text" id="todoIn" style="color:black;" placeholder="New task...">
-      <button onclick="todoAdd()" style="background:#38bdf8; border:none; padding:10px 20px; border-radius:5px; cursor:pointer;">Add</button>
+<!-- ADMIN PANEL -->
+<div id="admin" class="page">
+  <div class="container">
+    <h2>⚙️ Admin Control</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+      <div class="card-panel">
+        <h3>Add Game</h3>
+        <div class="form-group"><label>Name</label><input id="ad-name"></div>
+        <div class="form-group"><label>URL</label><input id="ad-url"></div>
+        <div class="form-group"><label>Image URL (Cover Art)</label><input id="ad-img"></div>
+        <button class="btn-play" onclick="adminAddGame()">ADD GAME</button>
+      </div>
+      <div class="card-panel">
+        <h3>Tickets</h3>
+        <div id="ticketBox" style="max-height: 300px; overflow-y: auto; font-size: 0.8rem;"></div>
+      </div>
     </div>
-    <div id="todoList"></div>
-    <button onclick="show('tools')" style="margin-top:20px; width:100%; padding:10px; background:none; color:#38bdf8; border:1px solid #38bdf8; border-radius:8px; cursor:pointer;">Back to Tools</button>
+    <button onclick="localStorage.clear(); location.reload();" style="margin-top: 40px; background:none; border:none; color:red; cursor:pointer;">Reset All Site Data</button>
   </div>
 </div>
 
-<div id="tool-clock" class="page">
-  <div class="tool-container" style="text-align:center;">
-    <h2>World Clock</h2>
-    <div id="localClock" style="font-size:3em; color:#00ff88; margin:20px 0;">00:00:00</div>
-    <p id="localDate" style="color:#94a3b8;"></p>
-    <button onclick="show('tools')" style="margin-top:20px; width:100%; padding:10px; background:none; color:#38bdf8; border:1px solid #38bdf8; border-radius:8px; cursor:pointer;">Back to Tools</button>
-  </div>
-</div>
-
-<div id="tool-pw" class="page">
-  <div class="tool-container" style="text-align:center;">
-    <h2>Password Generator</h2>
-    <div id="pwOut" style="background:#0f172a; padding:20px; border-radius:10px; margin:20px 0; font-family:monospace; font-size:1.5em; word-break:break-all;">Click Generate</div>
-    <button onclick="pwGen()" style="width:100%; padding:15px; background:#38bdf8; border:none; border-radius:10px; font-weight:bold; cursor:pointer;">Generate Strong Password</button>
-    <button onclick="show('tools')" style="margin-top:20px; width:100%; padding:10px; background:none; color:#38bdf8; border:1px solid #38bdf8; border-radius:8px; cursor:pointer;">Back to Tools</button>
-  </div>
-</div>
-
-<!-- Admin Modal -->
-<div id="adminModal" class="modal">
+<!-- ADMIN PASSWORD MODAL -->
+<div id="adminLogin" class="modal">
   <div class="modal-content">
-    <h2>🔐 Admin</h2>
-    <input type="password" id="adminPass" placeholder="Password">
-    <button onclick="checkAdmin()" style="background:#00ff88; width:100%; padding:10px; border:none; border-radius:5px; cursor:pointer;">Enter</button>
-    <button onclick="closeAdmin()" style="margin-top:10px; background:none; color:white; border:none; cursor:pointer;">Cancel</button>
+    <h3>Enter Admin Password</h3>
+    <input type="password" id="adminPwdInput" placeholder="Password...">
+    <button class="btn-play" onclick="processAdminLogin()">LOGIN</button>
+    <button onclick="closeAdminModal()" style="margin-top: 10px; background:none; border:none; color:var(--text-dim); cursor:pointer;">Cancel</button>
   </div>
 </div>
+
+<footer>
+  <p>&copy; 2026 UNBLOCKED.IO HUB • ALL DATA SAVED LOCALLY</p>
+</footer>
 
 <script>
-let cVal = "0";
-let todos = JSON.parse(localStorage.getItem('todos') || '[]');
+const ACCESS_KEY = "UnblockedGames.io!";
+const STARTER_GAMES = [
+  { id: 1, name: "Minecraft Classic", url: "https://classic.minecraft.net/", img: "https://images.unsplash.com/photo-1627389955609-bc013da0bc5a?auto=format&fit=crop&q=80&w=400" },
+  { id: 2, name: "1v1.lol", url: "https://1v1.lol/", img: "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=400" },
+  { id: 3, name: "Retro Bowl", url: "https://game312.github.io/retro-bowl/", img: "https://images.unsplash.com/photo-1566577739112-5180d4bf9390?auto=format&fit=crop&q=80&w=400" }
+];
+
+let hubGames = JSON.parse(localStorage.getItem('hub_games')) || STARTER_GAMES;
+let hubTickets = JSON.parse(localStorage.getItem('hub_tickets')) || [];
+let activeTheme = localStorage.getItem('hub_theme') || 'midnight';
+
+// INITIALIZE
+document.body.setAttribute('data-theme', activeTheme);
 
 function show(id) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById(id).classList.add('active');
+  document.getElementById('curPath').innerText = id.charAt(0).toUpperCase() + id.slice(1);
   window.scrollTo(0,0);
+  if(id === 'home' || id === 'games') renderHub();
+  if(id === 'admin') renderTickets();
 }
 
-// Calculator
-function cUpd() { document.getElementById('calcRes').innerText = cVal; }
-function cAdd(v) { if(cVal==="0") cVal=v; else cVal+=v; cUpd(); }
-function cDel() { cVal = cVal.length > 1 ? cVal.slice(0,-1) : "0"; cUpd(); }
-function cEq() { try { cVal = eval(cVal).toString(); } catch { cVal="Error"; } cUpd(); }
-
-// Todo
-function todoAdd() {
-  const i = document.getElementById('todoIn');
-  if(!i.value) return;
-  todos.push({text: i.value, done: false});
-  i.value = "";
-  todoSave();
-}
-function todoSave() {
-  localStorage.setItem('todos', JSON.stringify(todos));
-  todoRen();
-}
-function todoRen() {
-  document.getElementById('todoList').innerHTML = todos.map((t, i) => `
-    <div class="todo-item">
-      <span>${t.text}</span>
-      <button onclick="todos.splice(${i},1);todoSave()" style="background:red; color:white; border:none; padding:2px 8px; border-radius:3px; cursor:pointer;">X</button>
+function renderHub() {
+  const cardMaker = (g) => `
+    <div class="game-card" onclick="window.open('${g.url}', '_blank')">
+      <img src="${g.img || 'https://via.placeholder.com/400x160?text='+g.name}" class="game-img" onerror="this.src='https://via.placeholder.com/400x160?text=${g.name}'">
+      <div class="game-info">
+        <div class="game-title">${g.name}</div>
+        <button class="btn-play">PLAY</button>
+      </div>
     </div>
-  `).join('');
+  `;
+  const trend = document.getElementById('trendingGrid');
+  const full = document.getElementById('fullGamesGrid');
+  if(trend) trend.innerHTML = hubGames.slice(0, 3).map(cardMaker).join('');
+  if(full) full.innerHTML = hubGames.map(cardMaker).join('');
 }
 
-// Clock
-setInterval(() => {
-  const n = new Date();
-  const clock = document.getElementById('localClock');
-  if(clock) clock.innerText = n.toLocaleTimeString();
-  const d = document.getElementById('localDate');
-  if(d) d.innerText = n.toDateString();
-}, 1000);
-
-// Password
-function pwGen() {
-  const c = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*";
-  let p = "";
-  for(let i=0; i<16; i++) p += c.charAt(Math.floor(Math.random() * c.length));
-  document.getElementById('pwOut').innerText = p;
+function sendTicket() {
+  const title = document.getElementById('tk-title').value;
+  const url = document.getElementById('tk-url').value;
+  if(!title || !url) return alert("Fill all fields!");
+  hubTickets.push({ title, url, id: Date.now() });
+  localStorage.setItem('hub_tickets', JSON.stringify(hubTickets));
+  alert("Ticket Submitted! Our admin will review it.");
+  document.getElementById('tk-title').value = "";
+  document.getElementById('tk-url').value = "";
 }
 
-// Admin
-function requestAdminAccess() { document.getElementById('adminModal').classList.add('active'); }
-function closeAdmin() { document.getElementById('adminModal').classList.remove('active'); }
-function checkAdmin() {
-  if(document.getElementById('adminPass').value === "UnblockedGames.io!") {
-    alert("Admin Access Granted");
-    closeAdmin();
-  } else alert("Wrong Password");
+function renderTickets() {
+  const box = document.getElementById('ticketBox');
+  box.innerHTML = hubTickets.length ? hubTickets.map((t, i) => `
+    <div style="background:rgba(255,255,255,0.05); padding:10px; margin-bottom:5px; border-radius:8px;">
+      <b>${t.title}</b><br><small>${t.url}</small>
+      <button onclick="delTicket(${i})" style="float:right; background:none; border:none; color:red; cursor:pointer;">Del</button>
+    </div>
+  `).join('') : "No tickets yet.";
 }
 
-todoRen();
+function delTicket(i) { hubTickets.splice(i,1); localStorage.setItem('hub_tickets', JSON.stringify(hubTickets)); renderTickets(); }
+
+function adminAddGame() {
+  const name = document.getElementById('ad-name').value;
+  const url = document.getElementById('ad-url').value;
+  const img = document.getElementById('ad-img').value;
+  if(!name || !url) return alert("Name/URL required!");
+  hubGames.push({ id: Date.now(), name, url, img });
+  localStorage.setItem('hub_games', JSON.stringify(hubGames));
+  alert("Game Added Successfully!");
+  show('games');
+}
+
+function changeTheme(t) {
+  document.body.setAttribute('data-theme', t);
+  localStorage.setItem('hub_theme', t);
+  const toast = document.getElementById('toast');
+  toast.innerText = "Theme set to " + t.toUpperCase();
+  toast.style.display = "block";
+  setTimeout(() => toast.style.display = "none", 2000);
+}
+
+function openAdminModal() { document.getElementById('adminLogin').style.display = 'flex'; }
+function closeAdminModal() { document.getElementById('adminLogin').style.display = 'none'; }
+function processAdminLogin() {
+  if(document.getElementById('adminPwdInput').value === ACCESS_KEY) {
+    closeAdminModal();
+    show('admin');
+  } else alert("Access Denied!");
+}
+
+renderHub();
 </script>
 </body>
 </html>
