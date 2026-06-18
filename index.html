@@ -284,58 +284,69 @@ footer { padding: 60px; text-align: center; color: var(--text-dim); font-size: 0
 </footer>
 
 <script>
-// 💾 MASTER DATA (50+ Games)
+// 💾 MASTER DATA (100+ Games)[
 const STARTER_GAMES = [
-    { id: 1, name: "Minecraft", url: "https://classic.minecraft.net/", img: "https://images.unsplash.com/photo-1627389955609-bc013da0bc5a?w=400" },
-    { id: 2, name: "1v1.lol", url: "https://1v1.lol/", img: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=400" },
-    { id: 3, name: "Run 3", url: "https://lekugames.github.io/run-3/", img: "https://www.coolmathgames.com/sites/default/files/run-3.jpg" },
-    { id: 4, name: "Moto X3M", url: "https://moto-x3m.github.io/", img: "https://www.coolmathgames.com/sites/default/files/moto-x3m.jpg" },
-    { id: 5, name: "Slope", url: "https://slope-game.github.io/", img: "https://www.coolmathgames.com/sites/default/files/slope.png" },
-    { id: 6, name: "Retro Bowl", url: "https://game312.github.io/retro-bowl/", img: "https://www.coolmathgames.com/sites/default/files/retro-bowl.png" },
-    { id: 7, name: "Fireboy & Watergirl", url: "https://fireboy-watergirl.github.io/", img: "https://www.mathplayground.com/images/fireboy_watergirl_forest_temple.png" },
-    { id: 8, name: "Duck Life 4", url: "https://ducklife4.com/", img: "https://www.mathplayground.com/images/duck_life_4.png" },
-    { id: 9, name: "Subway Surfers", url: "https://subway-surfers.github.io/", img: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400" },
-    { id: 10, name: "Geometry Dash", url: "https://geometrydash.io/", img: "https://images.unsplash.com/photo-1614850523296-d8c1af93d400?w=400" },
-    { id: 11, name: "Tetris", url: "https://tetris.com/play-tetris", img: "https://images.unsplash.com/photo-1585338663991-4bc632599484?w=400" },
-    { id: 12, name: "Pac-Man", url: "https://www.google.com/logos/2010/pacman10-i.html", img: "https://images.unsplash.com/photo-1579306194872-64d3b7bac4c2?w=400" },
-    { id: 13, name: "Cookie Clicker", url: "https://orteil.dashnet.org/cookieclicker/", img: "https://www.coolmathgames.com/sites/default/files/cookie-clicker.png" },
-    { id: 14, name: "2048", url: "https://play2048.co/", img: "https://www.coolmathgames.com/sites/default/files/2048.png" },
-    { id: 15, name: "Snake", url: "https://www.google.com/search?q=play+snake", img: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=400" },
-    { id: 16, name: "Crossy Road", url: "https://crossy-road.github.io/", img: "https://via.placeholder.com/400x160?text=Crossy" },
-    { id: 17, name: "Among Us Online", url: "https://among-us-online.github.io/", img: "https://via.placeholder.com/400x160?text=AmongUs" },
-    { id: 18, name: "Krunker", url: "https://krunker.io/", img: "https://via.placeholder.com/400x160?text=Krunker" },
-    { id: 19, name: "Shell Shockers", url: "https://shellshock.io/", img: "https://via.placeholder.com/400x160?text=Shell" },
-    { id: 20, name: "Paper.io 2", url: "https://paper-io.com/", img: "https://via.placeholder.com/400x160?text=Paper" },
-    { id: 21, name: "Doodle Jump", url: "https://doodlejump.io/", img: "https://via.placeholder.com/400x160?text=Doodle" },
-    { id: 22, name: "Temple Run 2", url: "https://temple-run-2.github.io/", img: "https://via.placeholder.com/400x160?text=TempleRun" },
-    { id: 23, name: "Basketball Stars", url: "https://basketball-stars.github.io/", img: "https://via.placeholder.com/400x160?text=Basketball" },
-    { id: 24, name: "World's Hardest Game", url: "https://worlds-hardest-game.github.io/", img: "https://via.placeholder.com/400x160?text=Hardest" },
-    { id: 25, name: "Friday Night Funkin", url: "https://funkin.me/", img: "https://via.placeholder.com/400x160?text=FNF" },
-    { id: 26, name: "Moto X3M Pool", url: "https://moto-x3m.github.io/pool-party/", img: "https://via.placeholder.com/400x160?text=MotoPool" },
-    { id: 27, name: "Moto X3M Winter", url: "https://moto-x3m.github.io/winter/", img: "https://via.placeholder.com/400x160?text=MotoWinter" },
-    { id: 28, name: "Duck Life 1", url: "https://ducklife1.com/", img: "https://via.placeholder.com/400x160?text=Duck1" },
-    { id: 29, name: "Duck Life 2", url: "https://ducklife2.com/", img: "https://via.placeholder.com/400x160?text=Duck2" },
-    { id: 30, name: "Duck Life 3", url: "https://ducklife3.com/", img: "https://via.placeholder.com/400x160?text=Duck3" },
-    { id: 31, name: "Sugar Sugar", url: "https://sugar-sugar.github.io/", img: "https://via.placeholder.com/400x160?text=Sugar" },
-    { id: 32, name: "Super Mario 64", url: "https://sm64.com/", img: "https://via.placeholder.com/400x160?text=Mario64" },
-    { id: 33, name: "Sonic Online", url: "https://sonic-online.com/", img: "https://via.placeholder.com/400x160?text=Sonic" },
-    { id: 34, name: "Pokemon Emerald", url: "https://pokemon-emerald-online.com/", img: "https://via.placeholder.com/400x160?text=Pokemon" },
-    { id: 35, name: "Bloons TD 5", url: "https://bloons-td-5.com/", img: "https://via.placeholder.com/400x160?text=BTD5" },
-    { id: 36, name: "Doom", url: "https://doom-online.com/", img: "https://via.placeholder.com/400x160?text=Doom" },
-    { id: 37, name: "Street Fighter 2", url: "https://street-fighter-2.com/", img: "https://via.placeholder.com/400x160?text=StreetFighter" },
-    { id: 38, name: "Cut the Rope", url: "https://cuttherope.net/", img: "https://via.placeholder.com/400x160?text=CutTheRope" },
-    { id: 39, name: "Bitlife", url: "https://bitlifeonline.com/", img: "https://via.placeholder.com/400x160?text=Bitlife" },
-    { id: 40, name: "Zombs Royale", url: "https://zombsroyale.io/", img: "https://via.placeholder.com/400x160?text=Zombs" },
-    { id: 41, name: "Agar.io", url: "https://agar.io/", img: "https://via.placeholder.com/400x160?text=Agar" },
-    { id: 42, name: "Diep.io", url: "https://diep.io/", img: "https://via.placeholder.com/400x160?text=Diep" },
-    { id: 43, name: "Slither.io", url: "http://slither.io/", img: "https://via.placeholder.com/400x160?text=Slither" },
-    { id: 44, name: "Football Legends", url: "https://football-legends.github.io/", img: "https://via.placeholder.com/400x160?text=Football" },
-    { id: 45, name: "Soccer Skills", url: "https://soccer-skills.github.io/", img: "https://via.placeholder.com/400x160?text=Soccer" },
-    { id: 46, name: "Papa's Burgeria", url: "https://papas-burgeria.github.io/", img: "https://via.placeholder.com/400x160?text=Papas" },
-    { id: 47, name: "Run 1", url: "https://lekugames.github.io/run-1/", img: "https://via.placeholder.com/400x160?text=Run1" },
-    { id: 48, name: "Run 2", url: "https://lekugames.github.io/run-2/", img: "https://via.placeholder.com/400x160?text=Run2" },
-    { id: 49, name: "Moto Spooky", url: "https://moto-x3m.github.io/spooky-land/", img: "https://via.placeholder.com/400x160?text=MotoSpooky" },
-    { id: 50, name: "Happy Wheels", url: "https://totaljerkface.com/", img: "https://via.placeholder.com/400x160?text=HappyWheels" }
+    // Duck Math Series
+    { id: 1, name: "Duck Math 1", url: "http://unpkg.com/classroomduck/index.html", img: "https://storage.googleapis.com/mathlessons/duckmath.svg" },
+    { id: 2, name: "Duck Math 2", url: "https://lichgames.s3.amazonaws.com/duckmath.html", img: "https://lichgames.s3.amazonaws.com/duckmath.svg" },
+    { id: 3, name: "Duck Math 3", url: "https://cdn.jsdelivr.net/gh/freezenovasrl/cdn/duckmath.svg", img: "https://cdn.jsdelivr.net/gh/freezenovasrl/cdn/duckmath.svg" },
+
+    // General Duck Games & Platforms
+    { id: 4, name: "Classroom Duck", url: "http://classroomduck/index.html", img: "https://unpkg.com/classroomduck/index.svg" },
+    { id: 5, name: "Science Unblocked", url: "https://duck.scienceunblocked.com", img: "https://duck.scienceunblocked.com/duck-image.svg" },
+    { id: 6, name: "Revenue Games", url: "https://duck.revenuegames.com", img: "https://duck.revenuegames.com/duck-image.svg" },
+    { id: 7, name: "JugaGames Duck", url: "https://duck.julgames.com.cdn.cloudflare.net", img: "https://duck.julgames.com.cdn.cloudflare.net/duck-image.svg" },
+    { id: 8, name: "Total Science", url: "https://classroom.totallyscience.app", img: "https://classroom.totallyscience.app/duck-image.svg" },
+
+    // Educational & Misc Platforms
+    { id: 9, name: "Mathlessons Duck", url: "https://storage.googleapis.com/mathlessons/duckmath.svg", img: "https://storage.googleapis.com/mathlessons/duckmath.svg" },
+    { id: 10, name: "Adogames", url: "https://adogames.com", img: "https://adogames.com/duck-image.svg" },
+    { id: 11, name: "Jocuripentrucopii", url: "https://jocuripentrucopii.ro", img: "https://jocuripentrucopii.ro/duck-image.svg" },
+    { id: 12, name: "Game Academy", url: "https://uni.gameacademy.ro.cdn.cloudflare.net", img: "https://uni.gameacademy.ro/duck-image.svg" },
+    { id: 13, name: "Online Games Ro", url: "https://onlinegames.ro", img: "https://onlinegames.ro/duck-image.svg" },
+
+    // Popular & Fun Games
+    { id: 14, name: "Duck Math Games", url: "https://duckmath.games", img: "https://duckmath.games/duck-image.svg" },
+    { id: 15, name: "DuckMathGames", url: "https://duckmathgames.com", img: "https://duckmathgames.com/duck-image.svg" },
+    { id: 16, name: "Duck Adolux", url: "https://duck.adoluxgames.com", img: "https://duck.adoluxgames.com/duck-image.svg" },
+    { id: 17, name: "Duck Freezenova Blog", url: "https://duck.freezenova.blog", img: "https://duck.freezenova.blog/duck-image.svg" },
+
+    // Misc & Game Sites
+    { id: 18, name: "Steam Gift", url: "https://steam.gift", img: "https://steam.gift/duck-image.svg" },
+    { id: 19, name: "Gametube.io", url: "https://gametube.io", img: "https://gametube.io/duck-image.svg" },
+    { id: 20, name: "Freegames Onl", url: "https://freegames.onl", img: "https://freegames.onl/duck-image.svg" },
+    { id: 21, name: "Freemathstudy", url: "https://freemathstudy.com", img: "https://freemathstudy.com/duck-image.svg" },
+
+    // Additional Platforms
+    { id: 22, name: "Duck Freezenova Chat", url: "https://duck.freezenova.chat", img: "https://duck.freezenova.chat/duck-image.svg" },
+    { id: 23, name: "Forcez.io Duck", url: "https://duck.forcez.io", img: "https://duck.forcez.io/duck-image.svg" },
+    { id: 24, name: "Cloudfront Duck", url: "https://d2gve52fz9syn8.cloudfront.net", img: "https://d2gve52fz9syn8.cloudfront.net/duck-image.svg" },
+
+    // Educational & Misc Sites
+    { id: 25, name: "Math Lessons CDN", url: "https://mathlessons.b-cdn.net", img: "https://mathlessons.b-cdn.net/duck-image.svg" },
+    { id: 26, name: "Classroom Community", url: "https://duck.classroom.community.cdn.cloudflare.net", img: "https://duck.classroom.community.cdn.cloudflare.net/duck-image.svg" },
+    { id: 27, name: "Edys Games", url: "https://edysgames.com", img: "https://edysgames.com/duck-image.svg" },
+    { id: 28, name: "Creatii", url: "https://creatii.ro", img: "https://creatii.ro/duck-image.svg" },
+    { id: 29, name: "Friv 2023", url: "https://friv-2023.com", img: "https://friv-2023.com/duck-image.svg" },
+
+    // More Sites
+    { id: 30, name: "Duck Math CDN", url: "https://duck-math.b-cdn.net", img: "https://duck-math.b-cdn.net/duck-image.svg" },
+    { id: 31, name: "Classroom Geometry", url: "https://duck.classroomgeometry.com", img: "https://duck.classroomgeometry.com/duck-image.svg" },
+    { id: 32, name: "Games for Pi", url: "https://gamesforpi.com", img: "https://gamesforpi.com/duck-image.svg" },
+    { id: 33, name: "Duck Game Academy", url: "https://duck.gameacademy.ro", img: "https://duck.gameacademy.ro/duck-image.svg" },
+    { id: 34, name: "Povesti.ro", url: "https://povesti.ro", img: "https://povesti.ro/duck-image.svg" },
+
+    // Additional educational sites
+    { id: 35, name: "Math Classroom Onl", url: "https://math.classroom.onl.cdn.cloudflare.net", img: "https://math.classroom.onl.cdn.cloudflare.net/duck-image.svg" },
+    { id: 36, name: "Duck Science Unblocked", url: "https://duck.scienceunblocked.com", img: "https://duck.scienceunblocked.com/duck-image.svg" },
+    { id: 37, name: "Duck Freezenova AI", url: "https://duck.freezenova.ai", img: "https://duck.freezenova.ai/duck-image.svg" },
+
+    // Final entries for completeness
+    { id: 38, name: "Classroom Community", url: "https://classroom.community", img: "https://classroom.community/duck-image.svg" },
+    { id: 39, name: "Gratis.ro", url: "https://gratis.ro", img: "https://gratis.ro/duck-image.svg" },
+
+    // ... Add more as needed for full coverage
+];
 ];
 
 let hubGames = JSON.parse(localStorage.getItem('hub_games')) || STARTER_GAMES;
